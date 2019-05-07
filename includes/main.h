@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 19:29:10 by gedemais          #+#    #+#             */
-/*   Updated: 2019/03/28 11:32:42 by gedemais         ###   ########.fr       */
+/*   Created: 2019/04/29 13:18:14 by gedemais          #+#    #+#             */
+/*   Updated: 2019/04/29 13:34:49 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MAIN_H
+# define MAIN_H
 
-int		ft_abs(int nb)
-{
-	return ((nb >= 0) ? nb : -nb);
-}
+# include "../libft/libft.h"
+# include "../checker_prog/includes/checker.h"
+
+#endif

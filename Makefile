@@ -5,37 +5,41 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/03/27 19:17:23 by gedemais          #+#    #+#              #
-#    Updated: 2019/03/28 13:03:00 by gedemais         ###   ########.fr        #
+#    Created: 2019/04/29 13:09:56 by gedemais          #+#    #+#              #
+#    Updated: 2019/05/06 14:59:27 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-EXE = push_swap
+CC = gcc
 
-EXE_PATH = p_s/
+FLAGS = -Wall -Werror -Wextra
 
-NAME = checker
+INC = includes/main.h
 
-NAME_PATH = check/
+CHECK = checker
+CHECK_PATH = checker_prog/
 
-INC = includes/push_swap.h
+PS = push_swap
+PS_PATH = push_swap_prog/
 
-all : $(NAME) $(EXE)
+all : $(CHECK) $(PS)
 
-$(NAME) : $(NAME_PATH)
-	@make -C $(NAME_PATH)
-	@mv $(NAME_PATH)$(NAME) ./
+$(CHECK) : $(CHECK_PATH)
+	@make -C $(CHECK_PATH)
+	@mv $(CHECK_PATH)$(CHECK) ./
 
-$(EXE) : $(EXE_PATH)
-	@make -C $(EXE_PATH)
-	@mv $(EXE_PATH)$(EXE) ./
+
+$(PS) : $(PS_PATH)
+	@make -C $(PS_PATH)
+	@mv $(PS_PATH)$(PS) ./
 
 clean :
-	@make clean -C $(EXE_PATH)
-	@make clean -C $(NAME_PATH)
+	@make -C $(CHECK_PATH) clean
+	@make -C $(PS_PATH) clean
 
 fclean :
-	@make fclean -C $(EXE_PATH)
-	@make fclean -C $(NAME_PATH)
+	@make -C $(CHECK_PATH) fclean
+	@make -C $(PS_PATH) fclean
+	@rm -rf $(CHECKER) $(PS)
 
 re : fclean all

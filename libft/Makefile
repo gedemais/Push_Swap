@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2019/03/28 18:32:29 by gedemais         ###   ########.fr        #
+#    Updated: 2019/03/28 11:33:08 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,9 +104,7 @@ SRCS  =	ft_abs.c \
 		ft_quicksort.c \
 		ft_swap_str.c \
 		ft_swap_strs.c \
-		ft_screenlen.c \
-		ft_tabdel.c \
-		ft_tablen.c
+		ft_screenlen.c
 
 INC = libft.h
 
