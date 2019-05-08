@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/29 13:20:21 by gedemais          #+#    #+#              #
-#    Updated: 2019/05/06 15:03:27 by gedemais         ###   ########.fr        #
+#    Updated: 2019/05/08 17:10:18 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_NAME = main.c\
 			sort_stuff.c\
 			tab.c\
 			buff.c\
+			qsort.c\
 			moves_bis.c\
 			parsing.c
 
