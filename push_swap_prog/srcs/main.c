@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:44:42 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/08 17:10:31 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/09 12:21:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		ft_push_swap(t_env *env, int argc, char **argv)
 		ft_ps_lstdel(env->b);
 		return (0);
 	}
-	if (!(env = ft_qsort(env)))
+	if (!(env = ft_qsort(env, 'a', env->alen)))
 	{
 		ft_ps_lstdel(env->a);
 		ft_ps_lstdel(env->b);

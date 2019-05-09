@@ -6,11 +6,31 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 16:32:20 by gedemais          #+#    #+#             */
-/*   Updated: 2019/04/30 12:33:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:52:24 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int			*ft_get_tab(t_stack *stack, int *len)
+{
+	t_stack	*tmp;
+	int		*tab;
+	int		i;
+
+	i = 0;
+	tmp = stack;
+	*len = ft_ps_lstlen(stack);
+	if (!(tab = (int*)malloc(sizeof(int) * *len)))
+		return (NULL);
+	while (tmp)
+	{
+		tab[i] = tmp->val;
+		i++;
+		tmp = tmp->next;
+	}
+	return (tab);
+}
 
 int			ft_check_doubles(t_env *env)
 {

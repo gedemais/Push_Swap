@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:51:25 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/01 19:45:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/09 11:33:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ void	ft_print_stacks(t_env *env)
 	tmp = env->a;
 	if (tmp == NULL)
 		ft_putstr("A empty\n");
+	else
+	{
+		ft_putstr("A (");
+		ft_putnbr(ft_ps_lstlen(env->a));
+		ft_putstr(")\n");
+	}
 	while (tmp)
 	{
 		ft_putnbr(tmp->val);
@@ -44,6 +50,12 @@ void	ft_print_stacks(t_env *env)
 	tmp = env->b;
 	if (tmp == NULL)
 		ft_putstr("B empty\n");
+	else
+	{
+		ft_putstr("B (");
+		ft_putnbr(ft_ps_lstlen(env->b));
+		ft_putstr(")\n");
+	}
 	while (tmp)
 	{
 		ft_putnbr(tmp->val);
