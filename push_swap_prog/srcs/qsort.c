@@ -29,37 +29,8 @@ int		ft_guess_pivot(t_stack *stack)
 	return (ret);
 }
 
-t_env	*ft_partition(t_env *env, char stack)
-{
-	t_stack	*tmp;
-	int		pivot;
-
-	tmp = (stack == 'a') ? env->a : env->b;
-	pivot = ft_guess_pivot((stack == 'a') ? env->a : env->b);
-	while (tmp)
-	{
-		if (tmp->val > pivot)
-		{
-			env = (stack == 'a') ? ft_push_b(env, tmp->val) : ft_push_a(env, tmp->val);
-			tmp = (stack == 'a') ? env->a : env->b;
-		}
-		tmp = tmp->next;
-	}
-	return (env);
-}
-
 t_env	*ft_qsort(t_env *env, char stack, int size)
 {
-	static int	calls = 0;
-	ft_print_stacks(env);
 
-	printf("Call %d : A(%d), B(%d)\n", calls, env->alen, env->blen);
-	calls++;
-	env = ft_partition(env, stack);
-	if (size > 2)
-	{
-		env = ft_qsort(env, 'a', env->alen);
-		env = ft_qsort(env, 'b', env->blen);
-	}
 	return (env);
 }
