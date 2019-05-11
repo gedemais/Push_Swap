@@ -12,6 +12,12 @@
 
 #include "../includes/push_swap.h"
 
+void		ft_free_stacks(t_env *env)
+{
+	ft_ps_lstdel(env->a);
+	ft_ps_lstdel(env->b);
+}
+
 int		ft_push_swap(t_env *env, int argc, char **argv)
 {
 	if (!(env = ft_parsing(env, argc, argv)))
@@ -19,22 +25,16 @@ int		ft_push_swap(t_env *env, int argc, char **argv)
 	if (!(env = ft_init_stack(env)))
 		return (-1);
 	if (ft_is_sorted(env) == 1)
-	{	
-		ft_ps_lstdel(env->a);
-		ft_ps_lstdel(env->b);
+	{
+		ft_free_stacks(env);
 		return (0);
 	}
-	if (!(env = ft_qsort(env, 'a', env->alen)))
+	if (!(env = ft_ssort(env)))
 	{
-		ft_ps_lstdel(env->a);
-		ft_ps_lstdel(env->b);
+		ft_free_stacks(env);
 		return (-1);
 	}
-//	ft_print_stacks(env);
-//	if (ft_is_sorted(env) == 1)
-//		ft_putstr("Great\n");
-	ft_ps_lstdel(env->a);
-	ft_ps_lstdel(env->b);
+	ft_free_stacks(env);
 	ft_op_buff(NULL, 1);
 	return (1);
 }

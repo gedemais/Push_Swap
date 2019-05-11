@@ -31,6 +31,7 @@ int		ft_guess_pivot(t_stack *stack)
 
 t_env	*ft_qsort(t_env *env, char stack, int size)
 {
-
+	(void)stack;
+	(void)size;
 	return (env);
 }

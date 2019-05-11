@@ -46,17 +46,16 @@ typedef struct	s_opti
 	int		rrr;
 }				t_opti;
 
-t_env	*ft_ssort(t_env *env);
-t_env	*ft_qsort(t_env *env, char stack, int size);
+t_env		*ft_ssort(t_env *env);
+t_env		*ft_qsort(t_env *env, char stack, int size);
 int		ft_ps_lstlen(t_stack *stack);
-t_env	*ft_push_a(t_env *env, int val);
-t_env	*ft_push_b(t_env *env, int val);
+t_env		*ft_push_on_a(t_env *env, int val);
 int		*ft_sort_tab(int *tab, int len);
 
 
-char	*ft_op_buff(char *op, int flush);
-char	*ft_optimize_ops(char *str);
-t_env	*ft_three_sort(t_env *env, char stack);
+char		*ft_op_buff(char *op, int flush);
+char		*ft_optimize_ops(char *str);
+t_env		*ft_three_sort(t_env *env, char stack);
 int		*ft_get_tab(t_stack *stack, int *len);
 
 #endif

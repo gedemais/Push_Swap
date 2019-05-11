@@ -29,20 +29,52 @@ int		ft_get_index(t_stack *stack, int val)
 	return (ret);
 }
 
-t_env	*ft_push_b(t_env *env, int val)
+t_env	*ft_push_on_a(t_env *env, int val)
 {
-	int		index;
-	int		len;
+	t_stack	*tmp;
+	int	len;
+	int	index;
 
-	index = ft_get_index(env->a, val);
-	len = ft_ps_lstlen(env->a);
-	if (index < len / 2)
+	tmp = env->b;
+	if ((len = ft_ps_lstlen(env->b)) < 1)
+		return (env);
+	if ((index = ft_get_index(env->b, tmp->val)) == -1)
+		return (env);
+	if (index >= (len / 2))
+		while (env->b->val != val)
+		{
+			env = ft_rb(env);
+			ft_op_buff("rb", 0);
+		}
+	else if (index < (len / 2))
+		while (env->b->val != val)
+		{
+			env = ft_rrb(env);
+			ft_op_buff("rrb", 0);
+		}
+	env = ft_pa(env);
+	ft_op_buff("pa", 0);
+	return (env);
+}
+
+t_env	*ft_push_on_b(t_env *env, int val)
+{
+	t_stack	*tmp;
+	int	len;
+	int	index;
+
+	tmp = env->a;
+	if ((len = ft_ps_lstlen(env->a)) < 1)
+		return (env);
+	if ((index = ft_get_index(env->a, tmp->val)) == -1)
+		return (env);
+	if (index >= (len / 2))
 		while (env->a->val != val)
 		{
 			env = ft_ra(env);
 			ft_op_buff("ra", 0);
 		}
-	else
+	else if (index < (len / 2))
 		while (env->a->val != val)
 		{
 			env = ft_rra(env);
@@ -53,26 +85,3 @@ t_env	*ft_push_b(t_env *env, int val)
 	return (env);
 }
 
-t_env	*ft_push_a(t_env *env, int val)
-{
-	int		index;
-	int		len;
-
-	index = ft_get_index(env->b, val);
-	len = ft_ps_lstlen(env->b);
-	if (index < len / 2)
-		while (env->b->val != val)
-		{
-			PUT
-			env = ft_rb(env); ft_op_buff("rb", 0);
-		}
-	else
-		while (env->b->val != val)
-		{
-			env = ft_rrb(env);
-			ft_op_buff("rrb", 0);
-		}
-	env = ft_pa(env);
-	ft_op_buff("pa", 0);
-	return (env);
-}

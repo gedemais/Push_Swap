@@ -101,7 +101,7 @@ t_env	*ft_ssort(t_env *env)
 	while (env->b)
 	{
 		val = ft_find_biggest(env, 'b');
-		env = ft_push_a(env, val);
+		env = ft_push_on_a(env, val);
 	}
 	return (env);
 }
