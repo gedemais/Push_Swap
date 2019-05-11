@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:44:03 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/09 12:23:20 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/11 20:13:04 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@
 # include "../../libft/libft.h"
 # include "../../checker_prog/includes/checker.h"
 # include <limits.h>
-
-typedef struct	s_opti
-{
-	int		pa;
-	int		pb;
-	int		ra;
-	int		rb;
-	int		rra;
-	int		rrb;
-	int		sa;
-	int		sb;
-	int		ss;
-	int		rr;
-	int		rrr;
-}				t_opti;
 
 t_env		*ft_ssort(t_env *env);
 t_env		*ft_qsort(t_env *env, char stack, int size);

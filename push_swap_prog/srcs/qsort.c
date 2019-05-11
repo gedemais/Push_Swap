@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:25:41 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/09 12:24:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/11 20:13:03 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,21 @@ int		ft_guess_pivot(t_stack *stack)
 	return (ret);
 }
 
-t_env	*ft_qsort(t_env *env, char stack, int size)
+t_env	*ft_partition(t_stack *stack, int size)
 {
-	(void)stack;
-	(void)size;
+	int		pivot;
+
+
+}
+
+t_env	*ft_qsort(t_env *env, char size, int stack)
+{
+	if (!(env = ft_partition((stack == 'a') ? env->a : env->b, size)))
+		return (NULL);
+	if (size < 2)
+	{
+		env = ft_qsort(env, env->alen, stack);
+		env = ft_qsort(env, env->blen, stack);
+	}
 	return (env);
 }
