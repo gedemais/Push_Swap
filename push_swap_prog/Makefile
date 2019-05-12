@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/29 13:20:21 by gedemais          #+#    #+#              #
-#    Updated: 2019/05/09 12:25:16 by gedemais         ###   ########.fr        #
+#    Updated: 2019/05/12 20:12:28 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS_NAME = main.c\
 			buff.c\
 			qsort.c\
 			moves_bis.c\
+			two_sort.c\
 			parsing.c
 
 SRCS_PATH = srcs/

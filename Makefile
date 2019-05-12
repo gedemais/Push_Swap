@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/29 13:09:56 by gedemais          #+#    #+#              #
-#    Updated: 2019/05/06 14:59:27 by gedemais         ###   ########.fr        #
+#    Updated: 2019/05/12 20:47:13 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ clean :
 fclean :
 	@make -C $(CHECK_PATH) fclean
 	@make -C $(PS_PATH) fclean
-	@rm -rf $(CHECKER) $(PS)
+	@rm -rf checker
+	@rm -rf push_swap
 
 re : fclean all

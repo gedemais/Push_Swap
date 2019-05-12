@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:27:01 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/11 20:13:04 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/12 13:16:39 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_env	*ft_push_on_a(t_env *env, int val)
 		}
 	env = ft_pa(env);
 	ft_op_buff("pa", 0);
+	env->alen++;
+	env->blen--;
 	return (env);
 }
 
@@ -82,6 +84,8 @@ t_env	*ft_push_on_b(t_env *env, int val)
 		}
 	env = ft_pb(env);
 	ft_op_buff("pb", 0);
+	env->alen--;
+	env->blen++;
 	return (env);
 }
 

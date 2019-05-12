@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:30:39 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/06 18:24:41 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/12 17:32:11 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_env
 	t_stack	*b;
 	int		*suit;
 	int		len;
+	int		plen;
 	int		alen;
 	int		blen;
 	bool	error;

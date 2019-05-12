@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 11:17:03 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/07 13:11:38 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/12 20:10:47 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_env	*ft_ssort(t_env *env)
 
 	i = 0;
 	env = ft_sstart(env);
-	env = ft_three_sort(env, 'a');
+	env = ft_three_sort_a(env, 'a');
 	while (env->b)
 	{
 		val = ft_find_biggest(env, 'b');
