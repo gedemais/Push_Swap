@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:25:41 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/12 20:46:39 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/13 20:30:55 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,13 @@ t_env			*ft_partition(t_env *env, char stack, int size)
 	printf("---- Partition on %c ----\n", stack);
 	printf("Pivot = %lld\nSize = %d\n", pivot, size);
 	ft_print_stacks(env);
+	sleep(3);
 	while (tmp)
 	{
 		if (tmp->val < pivot && stack == 'a')
 		{
 	ft_print_stacks(env);
+	sleep(1);
 			env = ft_push_on_b(env, tmp->val);
 			env->plen++;
 			tmp = env->a;
@@ -54,6 +56,7 @@ t_env			*ft_partition(t_env *env, char stack, int size)
 		else if (tmp->val > pivot && stack == 'b')
 		{
 	ft_print_stacks(env);
+	sleep(1);
 			env = ft_push_on_a(env, tmp->val);
 			env->plen++;
 			tmp = env->b;
@@ -63,7 +66,6 @@ t_env			*ft_partition(t_env *env, char stack, int size)
 	}
 	env = (stack == 'a') ? ft_push_on_b(env, pivot) : ft_push_on_a(env, pivot);
 	ft_print_stacks(env);
-	sleep(1);
 	return (env);
 }
 
@@ -71,8 +73,11 @@ t_env			*ft_rollback(t_env *env, char stack)
 {
 	int		i = 0;
 
+	printf("RollBack\n");
 	while (i < env->plen)
 	{
+	ft_print_stacks(env);
+	sleep(1);
 		env = (stack == 'a') ? ft_pa(env) : ft_pb(env);
 		ft_op_buff((stack == 'a') ? "pa" : "pb", 0);
 		i++;
@@ -100,12 +105,12 @@ t_env			*ft_qsort(t_env *env, char stack, int size)
 	if (stack == 'a')
 	{
 		env = ft_qsort(env, stack, env->alen);
-		env = ft_qsort(env, 'b', env->blen - env->plen);
+		env = ft_qsort(env, 'b', env->blen);
 	}
 	else if (stack == 'b')
 	{
+		env = ft_qsort(env, 'a', env->alen);
 		env = ft_qsort(env, stack, env->blen);
-		env = ft_qsort(env, 'a', env->alen - env->plen);
 	}
 	env = ft_rollback(env, stack);
 	return (env);

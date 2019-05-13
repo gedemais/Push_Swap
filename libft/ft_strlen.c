@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:26:56 by gedemais          #+#    #+#             */
-/*   Updated: 2019/04/29 18:10:06 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/04/01 12:49:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ size_t					ft_strlen(const char *s)
 	unsigned long	magicbit;
 	unsigned long	tester;
 
-	if (!s)
+	if (!s || s[0] == '\0')
 		return (0);
 	magicbit = (0x7efefefeL << 32) | 0xfefefeffL;
 	tester = ~magicbit;
