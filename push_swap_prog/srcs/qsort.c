@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:25:41 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/13 20:30:55 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/14 21:11:13 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ t_env			*ft_partition(t_env *env, char stack, int size)
 {
 	long long int	pivot;
 	t_stack			*tmp;
+	int				len;
 
+	len = 0;
 	env->plen = 0;
 	tmp = (stack == 'a') ? env->a : env->b;
 	if ((pivot = ft_guess_pivot((stack == 'a') ? env->a : env->b)) == LONG_MAX)
@@ -42,27 +44,32 @@ t_env			*ft_partition(t_env *env, char stack, int size)
 	printf("---- Partition on %c ----\n", stack);
 	printf("Pivot = %lld\nSize = %d\n", pivot, size);
 	ft_print_stacks(env);
-	sleep(3);
-	while (tmp)
+	sleep(1);
+	while (tmp && len < size)
 	{
 		if (tmp->val < pivot && stack == 'a')
 		{
 	ft_print_stacks(env);
-	sleep(1);
+	usleep(100000);
 			env = ft_push_on_b(env, tmp->val);
 			env->plen++;
 			tmp = env->a;
+			len = 0;
 		}
 		else if (tmp->val > pivot && stack == 'b')
 		{
 	ft_print_stacks(env);
-	sleep(1);
+	usleep(100000);
 			env = ft_push_on_a(env, tmp->val);
 			env->plen++;
 			tmp = env->b;
+			len = 0;
 		}
 		else
+		{
+			len++;
 			tmp = tmp->next;
+		}
 	}
 	env = (stack == 'a') ? ft_push_on_b(env, pivot) : ft_push_on_a(env, pivot);
 	ft_print_stacks(env);
@@ -87,6 +94,7 @@ t_env			*ft_rollback(t_env *env, char stack)
 
 t_env			*ft_qsort(t_env *env, char stack, int size)
 {
+	int		nb;
 	printf("---- Quicksort on %c ----\nSize = %d\n", stack, size);
 	ft_print_stacks(env);
 
@@ -102,16 +110,17 @@ t_env			*ft_qsort(t_env *env, char stack, int size)
 	}
 	if (!(env = ft_partition(env, stack, size)))
 		return (NULL);
+	nb = env->plen;
 	if (stack == 'a')
 	{
 		env = ft_qsort(env, stack, env->alen);
-		env = ft_qsort(env, 'b', env->blen);
+		env = ft_qsort(env, 'b', env->blen - nb);
 	}
 	else if (stack == 'b')
 	{
-		env = ft_qsort(env, 'a', env->alen);
+		env = ft_qsort(env, 'a', env->alen - nb);
 		env = ft_qsort(env, stack, env->blen);
 	}
-	env = ft_rollback(env, stack);
+//	env = ft_rollback(env, stack);
 	return (env);
 }
