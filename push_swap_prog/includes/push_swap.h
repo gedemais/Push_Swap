@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 13:44:03 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/14 21:11:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:48:36 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		ft_ps_lstlen(t_stack *stack);
 t_env		*ft_push_on_a(t_env *env, int val);
 t_env		*ft_push_on_b(t_env *env, int val);
 int		*ft_sort_tab(int *tab, int len);
+int		ft_is_stack_sorted(t_stack *stack);
 
 
 char		*ft_op_buff(char *op, int flush);

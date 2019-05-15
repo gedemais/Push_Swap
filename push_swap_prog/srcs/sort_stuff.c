@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/09 12:27:01 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/14 21:11:15 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:48:35 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int		ft_get_index(t_stack *stack, int val)
 
 	ret = 0;
 	tmp = stack;
-	while (tmp && tmp->val != val)
+	if (tmp == NULL)
+		return (-1);
+	while (tmp)
 	{
+		if (tmp->val == val)
+			return (ret);
 		ret++;
 		tmp = tmp->next;
 	}
-	if (tmp == NULL)
-		return (-1);
-	return (ret);
+	return (-1);
 }
 
 t_env	*ft_push_on_a(t_env *env, int val)
@@ -68,15 +70,15 @@ t_env	*ft_push_on_b(t_env *env, int val)
 	tmp = env->a;
 	if ((len = ft_ps_lstlen(env->a)) < 1)
 		return (env);
-	if ((index = ft_get_index(env->a, tmp->val)) == -1)
+	if ((index = ft_get_index(env->a, val)) == -1)
 		return (env);
-	if (index >= (len / 2))
+	if (index <= (len / 2))
 		while (env->a->val != val)
 		{
 			env = ft_ra(env);
 			ft_op_buff("ra", 0);
 		}
-	else if (index < (len / 2))
+	else if (index > (len / 2))
 		while (env->a->val != val)
 		{
 			env = ft_rra(env);

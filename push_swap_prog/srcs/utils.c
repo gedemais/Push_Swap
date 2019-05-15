@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 17:51:25 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/12 17:32:12 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/15 18:45:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,26 @@ void	ft_print_stacks(t_env *env)
 	ft_putchar('\n');
 }
 
-int 	ft_is_sorted(t_env *env)
+int		ft_is_stack_sorted(t_stack *stack)
 {
 	t_stack		*tmp;
 
-	tmp = env->a;
-	if (env->b != NULL)
-		return (0);
+	tmp = stack;
 	while (tmp->next)
 	{
 		if (tmp->val > tmp->next->val)
 			return (0);
 		tmp = tmp->next;
 	}
+	return (1);
+}
+
+int 	ft_is_sorted(t_env *env)
+{
+	if (env->b != NULL)
+		return (0);
+	else if (ft_is_stack_sorted(env->a) == 0)
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/06 13:40:43 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/12 20:11:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:45:43 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ t_env	*ft_case_two(t_env *env, char stack)
 	if (stack == 'a')
 	{
 		env = ft_ss(env, 'a');
-		ft_op_buff("sa", 0);
+		env = ft_ra(env);
+		ft_op_buff("sa\nra", 0);
 	}
 	else
 	{
 		env = ft_ss(env, 'b');
 		env = ft_rb(env);
-		ft_op_buff("sb", 0);
+		ft_op_buff("sb\nrb", 0);
 	}
 	return (env);
 }

@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/30 11:17:03 by gedemais          #+#    #+#             */
-/*   Updated: 2019/05/12 20:10:47 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/05/15 19:45:42 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		ft_find_biggest(t_env *env, char stack)
+int		ft_find_smallest(t_env *env, char stack)
 {
 	t_stack	*tmp;
 	int		best;
@@ -21,7 +21,7 @@ int		ft_find_biggest(t_env *env, char stack)
 	best = (stack == 'a') ? env->a->val : env->b->val;
 	while (tmp)
 	{
-		if (tmp->val > best)
+		if (tmp->val < best)
 			best = tmp->val;
 		tmp = tmp->next;
 	}
@@ -76,6 +76,8 @@ t_env	*ft_sstart(t_env *env)
 	tab = ft_sort_tab(tab, env->alen);
 	while (env->a->next->next->next)
 	{
+	ft_print_stacks(env);
+	usleep(100000);
 		if (env->a->val != tab[env->alen - 1] && env->a->val != tab[env->alen - 2] && env->a->val != tab[env->alen - 3])
 		{
 			env = ft_pb(env);
@@ -92,16 +94,21 @@ t_env	*ft_sstart(t_env *env)
 
 t_env	*ft_ssort(t_env *env)
 {
-	int		val;
 	int		i;
 
 	i = 0;
-	env = ft_sstart(env);
-	env = ft_three_sort_a(env, 'a');
+	while (env->alen > 3)
+	{
+		if (!(env = ft_push_on_b(env, ft_find_smallest(env, 'a'))))
+			return (NULL);
+	}
+	if (!(env = ft_three_sort_a(env, 'a')))
+		return (NULL);
 	while (env->b)
 	{
-		val = ft_find_biggest(env, 'b');
-		env = ft_push_on_a(env, val);
+		if (!(env = ft_pa(env)))
+			return (NULL);
+		ft_op_buff("pa", 0);
 	}
 	return (env);
 }
