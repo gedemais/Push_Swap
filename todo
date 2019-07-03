@@ -1,0 +1,5 @@
+Checker :
+Read les moves sur stdin et les parser
+
+Push_Swap :
+Parser les parametres dans argv
