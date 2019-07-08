@@ -32,8 +32,6 @@ CC = @gcc
 
 FLAGS = -Wall -Werror -Wextra
 
-OFLAGS = -O3 -Ofast -march=native
-
 SRCS  =	ft_atoi.c \
 		ft_abs.c\
 		ft_bzero.c \
@@ -119,7 +117,7 @@ $(NAME) : $(OBJS)
 	@echo "$(GRE)Done !$(DEF)"
 
 ./%.o: ./%.c
-	$(CC) $(FLAGS) $(OFLAGS) -c $<
+	$(CC) $(FLAGS) -c $<
 
 clean: 
 	@rm -rf $(OBJS)

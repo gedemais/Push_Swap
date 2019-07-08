@@ -4,7 +4,16 @@ DFLAGS = -Weverything -Wall -Werror -Wextra -g3 -fsanitize=address
 
 NAME = checker
 
-SRCS_NAME = main.c
+SRCS_NAME = main.c\
+	    parsing.c\
+	    start_check.c\
+	    init_stack.c\
+	    run_instructions.c\
+	    instruction_push_swap.c\
+	    instruction_rotate.c\
+	    instruction_reverse_rotate.c\
+	    get_numbers.c
+
 SRCS_PATH = srcs/
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
@@ -24,11 +33,15 @@ $(NAME) : $(OBJS)
 
 $(OBJS) : $(SRCS)
 	@mkdir -p $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS)
 	@mv $(OBJS_NAME) $(OBJS_PATH)
+
+fsanitize: $(SRCS)
+	$(CC) $(CFLAGS) -g3 -fsanitize=address -o $(NAME) $(SRCS) $(LIB)
 
 clean :
 	@rm -rf $(OBJS_PATH)
+	@rm -rf $(NAME).dSYM
 
 fclean : clean
 	@rm -rf $(NAME)

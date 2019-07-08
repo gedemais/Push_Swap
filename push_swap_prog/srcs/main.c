@@ -1,4 +1,4 @@
-#include "../includes/checker.h"
+#include "../includes/push_swap.h"
 
 void			print_lst(t_env *env)
 {
@@ -34,41 +34,34 @@ void			print_lst(t_env *env)
 	ft_putchar('\n');
 }
 
-static inline	int	check_stack(t_env *env)
+static inline int	choose_sort_algo(t_env *env, int len)
 {
-	t_stack		*tmp;
-
-	if (!env || env->b)
-		return (-1);
-	tmp = env->a;
-	while (tmp->next)
-	{
-		if (tmp->val > tmp->next->val)
-			return (-1);
-		tmp = tmp->next;
-	}
-	return (0);
+	(void)env;
+	if (len <= 3)
+		return (A_THREESORT);
+	else if (len <= 10)
+		return (A_SELECTION);
+	else
+		return (A_QUICKSORT);
 }
 
-static inline int	checker(int argc, char **argv)
+static inline int	push_swap(int argc, char **argv)
 {
 	long long int	*stack;
 	t_env		env;
+	int		algo;
 	int		len;
 
+	algo = 0;
 	if (!(stack = parsing(argc, argv, &len)))
 		return (-1);
 	if (init_stack(&env, stack, len) == -1)
 		return (-1);
 	free(stack);
-	if (run_instructions(&env) == -1)
+	if ((algo += choose_sort_algo(&env, len)) == -1)
 		return (-1);
-	if (check_stack(&env) == -1)
-	{
-		free_stacks(&env);
-		return (1);
-	}
-	free_stacks(&env);
+	if (sort_stacks(&env, algo) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -76,15 +69,10 @@ int			main(int argc, char **argv)
 {
 	int	ret;
 
-	ret = checker(argc, argv);
-	if (ret == -1)
-		ft_putendl_fd("Error", STDERR_FILENO);
-	else if (ret == 1)
-		ft_putendl("KO");
-	else if (ret == 0)
+	if (argc < 2 || (ret = push_swap(argc, argv)) == -1)
 	{
-		ft_putendl("OK");
-		return (0);
+		ft_putendl_fd("Error", STDERR_FILENO);
+		return (1);
 	}
-	return (1);
+	return (0);
 }
