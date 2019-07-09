@@ -1,6 +1,9 @@
 CC = gcc
 CFLAGS = -Weverything -Wall -Werror -Wextra
-DFLAGS = -Weverything -Wall -Werror -Wextra -g3 -fsanitize=address
+
+ifneq (,$(filter debug, $(MAKECMDGOALS)))
+CFLAGS+=-g3 -fsanitize=address
+endif
 
 NAME = push_swap
 
@@ -32,23 +35,22 @@ LIB_PATH = ../libft/
 
 LIB = $(LIB_PATH)libft.a
 
-all : $(NAME) $(LIB)
+all: $(NAME) $(LIB)
 
-$(NAME) : $(OBJS)
+$(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIB)
 
-$(OBJS) : $(SRCS)
+$(OBJS): $(SRCS) $(LIB)
 	@mkdir -p $(OBJS_PATH)
-	@$(CC) $(CFLAGS) -c $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS)
 	@mv $(OBJS_NAME) $(OBJS_PATH)
 
-fsanitize: $(SRCS)
-	$(CC) $(CFLAGS) $(DFLAGS) -o $(NAME) $(SRCS) $(LIB)
+debug: all
 
-clean :
+clean:
 	@rm -rf $(OBJS_PATH)
 
-fclean : clean
+fclean: clean
 	@rm -rf $(NAME)
 
-re : fclean all
+re: fclean all
