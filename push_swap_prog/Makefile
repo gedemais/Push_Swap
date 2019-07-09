@@ -12,8 +12,10 @@ SRCS_NAME = 	main.c\
 		get_numbers.c\
 	    	init_stack.c\
 		threesort.c\
+		quicksort.c\
 		sort_stacks.c\
 		moves_buffer.c\
+		optimize_buff.c\
 		instruction_push_swap.c\
 		instruction_reverse_rotate.c\
 		instruction_rotate.c

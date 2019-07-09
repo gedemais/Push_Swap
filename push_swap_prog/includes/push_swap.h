@@ -21,8 +21,11 @@
 # define RRB_ID 1024
 # define RRR_ID 2048
 
+int		*optimize_buff(int *buff);
+int		quicksort(t_env *env, unsigned int size, char stack);
 int		selection_sort(t_env *env);
 int		three_sort_a(t_env *env);
+int		three_sort_b(t_env *env);
 unsigned int	ps_lstlen(t_stack *lst);
 
 int		sort_stacks(t_env *env, int algo);

@@ -74,7 +74,7 @@ int	moves_buffer(char *move, int flush)
 		index++;
 		if (index == size && (size *= 2))
 			if (!(buff = realloc_buff(buff, size)))
-			return (-1);
+				return (-1);
 	}
 	return (0);
 }

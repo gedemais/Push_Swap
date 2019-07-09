@@ -1,19 +1,35 @@
 #include "../includes/push_swap.h"
 
-static inline void	case_two(t_env *env)
+static inline void	case_two(t_env *env, char stack)
 {
-	moves_buffer("sa\n", 0);
-	moves_buffer("ra\n", 0);
-	swap_a(env);
-	rotate_a(env);
+	moves_buffer((stack == 'a' ? "sa\n" : "sb\n"), 0);
+	moves_buffer((stack == 'a' ? "ra\n" : "rb\n"), 0);
+	if (stack == 'a')
+	{
+		swap_a(env);
+		rotate_a(env);
+	}
+	else
+	{
+		swap_b(env);
+		rotate_b(env);
+	}
 }
 
-static inline void	case_six(t_env *env)
+static inline void	case_six(t_env *env, char stack)
 {
-	moves_buffer("ra\n", 0);
-	moves_buffer("sa\n", 0);
-	rotate_a(env);
-	swap_a(env);
+	moves_buffer((stack == 'a' ? "ra\n" : "rb\n"), 0);
+	moves_buffer((stack == 'a' ? "sa\n" : "sb\n"), 0);
+	if (stack == 'a')
+	{
+		swap_a(env);
+		rotate_a(env);
+	}
+	else
+	{
+		swap_b(env);
+		rotate_b(env);
+	}
 }
 
 int	three_sort_a(t_env *env)
@@ -30,23 +46,40 @@ int	three_sort_a(t_env *env)
 	if (a < b && b < c && a < c)
 		return (0);
 	else if (a < b && b > c && a < c)
-		case_two(env);
-	else if (a > b && b < c && a < c)
-	{
-		moves_buffer("sa\n", 0);
+		case_two(env, 'a');
+	else if (a > b && b < c && a < c && moves_buffer("sa\n", 0) == 0)
 		swap_a(env);
-	}
-	else if (a < b && b > c && a > c) // rra
-	{
-		moves_buffer("rra\n", 0);
+	else if (a < b && b > c && a > c && moves_buffer("rra\n", 0) == 0) // rra
 		reverse_rotate_a(env);
-	}
-	else if (a > b && b < c && a > c) // ra
-	{
-		moves_buffer("ra\n", 0);
+	else if (a > b && b < c && a > c && moves_buffer("ra\n", 0) == 0) // ra
 		rotate_a(env);
-	}
 	else if (a > b && b > c && a > c) // sa rra
-		case_six(env);
+		case_six(env, 'a');
+	return (0);
+}
+
+int	three_sort_b(t_env *env)
+{
+	int	a;
+	int	b;
+	int	c;
+
+	if (!env->b->next || !env->b->next->next)
+		return (-1);
+	a = env->b->val;
+	b = env->b->next->val;
+	c = env->b->next->next->val;
+	if (a < b && b < c && a < c)
+		return (0);
+	else if (a < b && b > c && a < c)
+		case_two(env, 'b');
+	else if (a > b && b < c && a < c && moves_buffer("sb\n", 0) == 0)
+		swap_b(env);
+	else if (a < b && b > c && a > c && moves_buffer("rrb\n", 0) == 0) // rra
+		reverse_rotate_b(env);
+	else if (a > b && b < c && a > c && moves_buffer("rb\n", 0) == 0) // ra
+		rotate_b(env);
+	else if (a > b && b > c && a > c) // sa rra
+		case_six(env, 'b');
 	return (0);
 }

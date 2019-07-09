@@ -14,7 +14,6 @@ static inline int	run_move(t_env *env, char *line)
 		if (ft_strcmp(line, moves[i]) == 0)
 		{
 			(*moves_fts[i])(env);
-			print_lst(env);
 			return (0);
 		}
 		i++;

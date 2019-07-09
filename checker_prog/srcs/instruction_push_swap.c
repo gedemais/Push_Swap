@@ -21,7 +21,6 @@ void	push_b(t_env *env)
 	tmp = env->a;
 	env->a = env->a->next;
 	tmp->next = env->b;
-	print_lst(env);
 	env->b = tmp;
 }
 
