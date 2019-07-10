@@ -93,40 +93,27 @@ int	quicksort(t_env *env)
 		env->size = ps_lstlen(env->stack == 'a' ? env->a : env->b);
 		quicksort(env);
 		env->stack = (env->stack == 'a' ? 'b' : 'a');
-		env->size = ps_lstlen(env->stack == 'a' ? env->a : env->b) - nb_push - 1;
+		env->size = ps_lstlen(env->stack == 'a' ? env->a : env->b) - nb_push;
 		quicksort(env);
 	}
-	if (env->stack == 'a')
+	if (env->size == 3 && q_three_sort_a(env) != 0)
+		return (-1);
+	else if (env->size == 2 && (env->stack == 'a' ? env->a :env->b)->val > (env->stack == 'a' ? env->a :env->b)->next->val)
 	{
-		if (env->size == 3)
-			three_sort_a(env);
-		else if (env->size == 2 && env->a->val > env->a->next->val)
-		{
-			moves_buffer("sa\n", 0);
+		moves_buffer((env->stack == 'a' ? "sa\n" : "sb\n"), 0);
+		if (env->stack == 'a')
 			swap_a(env);
-		}
-		while (env->size > 0)
-		{
-			moves_buffer("pa\n", 0);
-			push_a(env);
-			env->size--;
-		}
-	}
-	else if (env->stack == 'b')
-	{
-		if (env->size == 3)
-			three_sort_b(env);
-		else if (env->size == 2 && env->a->val > env->a->next->val)
-		{
-			moves_buffer("sb\n", 0);
+		else if (env->stack == 'b')
 			swap_b(env);
-		}
-		while (env->size > 0)
-		{
-			moves_buffer("pb\n", 0);
+	}
+	while (nb_push > 0)
+	{
+		moves_buffer((env->stack == 'a' ? "pb\n" : "pa\n"), 0);
+		if (env->stack == 'a')
 			push_b(env);
-			env->size--;
-		}
+		else if (env->stack == 'b')
+			push_a(env);
+		nb_push--;
 	}
 	return (0);
 }
