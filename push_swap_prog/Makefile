@@ -13,6 +13,7 @@ SRCS_NAME = 	main.c\
 		selection_sort.c\
 		utils.c\
 		get_numbers.c\
+		sort_processes.c\
 	    	init_stack.c\
 		threesort.c\
 		quicksort.c\
@@ -42,7 +43,7 @@ $(NAME): $(OBJS)
 
 $(OBJS): $(SRCS) $(LIB)
 	@mkdir -p $(OBJS_PATH)
-	$(CC) $(CFLAGS) -c $(SRCS)
+	@$(CC) $(CFLAGS) -c $(SRCS)
 	@mv $(OBJS_NAME) $(OBJS_PATH)
 
 debug: all

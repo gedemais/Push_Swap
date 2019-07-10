@@ -6,6 +6,8 @@ int	sort_stacks(t_env *env, int algo)
 	static int		(*sort_fts[NB_ALGOS])(t_env*) = {selection_sort, quicksort, three_sort_a};
 	unsigned int	i = 0;
 
+	env->size = ps_lstlen(env->a);
+	env->stack = 'a';
 	while (i < NB_ALGOS)
 	{
 		if (algo == (int)algos[i])

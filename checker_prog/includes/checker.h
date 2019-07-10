@@ -27,6 +27,11 @@ typedef struct	s_env
 	t_stack	*a;
 	t_stack	*b;
 	int	*moves;
+	unsigned int		nb_push;
+	unsigned int	size;
+	unsigned int	_pad;
+	char		stack;
+	char		s[3];
 }		t_env;
 
 void		free_stacks(t_env *env);
