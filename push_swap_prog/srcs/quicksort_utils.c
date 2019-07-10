@@ -54,7 +54,7 @@ int	q_three_sort_a(t_env *env)
 	int	b;
 	int	c;
 
-	if (!env->a->next || !env->a->next->next)
+	if (!env->a || !env->a->next || !env->a->next->next)
 		return (-1);
 	a = env->a->val;
 	b = env->a->next->val;
