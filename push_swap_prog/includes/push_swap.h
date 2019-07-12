@@ -2,6 +2,7 @@
 # define PUSH_SWAP_H
 
 # include "../../checker_prog/includes/checker.h"
+# include <limits.h>
 
 # define NB_ALGOS 3
 

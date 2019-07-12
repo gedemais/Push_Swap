@@ -40,6 +40,7 @@ int			push_on_b(t_env *env, int val)
 		}
 	moves_buffer("pb\n", 0);
 	push_b(env);
+	
 	return (0);
 }
 

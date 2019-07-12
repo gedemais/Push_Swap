@@ -32,6 +32,7 @@ void			print_lst(t_env *env)
 	else
 		ft_putstr("Empty\n");
 	ft_putchar('\n');
+	ft_putchar('\n');
 }
 
 static inline int	choose_sort_algo(t_env *env, int len)

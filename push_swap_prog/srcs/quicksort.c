@@ -1,126 +1,193 @@
 #include "../includes/push_swap.h"
 
-static inline int	find_closest_node(t_stack *stack, int target, int size)
+static inline int		find_closest_node(t_env *env, unsigned int size, char s, int target)
 {
 	t_stack		*tmp;
-	int		best;
-	int		diff;
-	int		i;
+	unsigned int	diff;
+	unsigned int	best_diff;
+	unsigned int	i;
+	int		ret;
 
 	i = 0;
-	tmp = stack;
-	best = ft_abs(target - tmp->val);
+	best_diff = UINT_MAX;
+	tmp = (s == 'a') ? env->a : env->b;
+	ret = tmp->val;
 	while (tmp && i < size)
 	{
-		if (tmp->val == target)
+		if (target == tmp->val)
 			return (tmp->val);
-		diff = ft_abs(target - tmp->val);
-		if (diff < best)
-			best = diff;
-		tmp = tmp->next;
-	}
-	return (best);
-}
-
-static inline int	get_median_val(t_stack *stack, int size)
-{
-	t_stack		*tmp;
-	unsigned int	i;
-	int		middle;
-
-	i = 0;
-	middle = 0;
-	tmp = stack;
-	while (tmp && (int)i < size)
-	{
-		middle += tmp->val;
+		diff = (unsigned int)ft_abs(target - tmp->val);
+		if (diff < best_diff)
+		{
+			diff = best_diff;
+			ret = tmp->val;
+		}
 		tmp = tmp->next;
 		i++;
 	}
-	return (find_closest_node(stack, middle / (int)i, size));
+	return (ret);
 }
 
-static inline unsigned int	partition(t_env *env, char stack)
+static inline int		get_median(t_env *env, unsigned int size, char s)
 {
 	t_stack		*tmp;
+	int		average;
+	int		i;
+
+	i = 0;
+	average = 0;
+	tmp = (s == 'a') ? env->a : env->b;
+	while (tmp && i < (int)size)
+	{
+		average += tmp->val;
+		tmp = tmp->next;
+		i++;
+	}
+	average /= i;
+	return (find_closest_node(env, size, s, average));
+}
+
+static inline unsigned int	check_values(t_stack *stack, int median, char s)
+{
+	t_stack		*tmp;
+
+	tmp = stack;
+	while (tmp)
+	{
+		if (s == 'a' && tmp->val > median)
+			return (1);
+		else if (s == 'b' && tmp->val < median)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+static inline unsigned int	partition_a(t_env *env, unsigned int size)
+{
 	int		median;
 	unsigned int	ret;
 	unsigned int	i;
 
-
-	median = get_median_val((stack == 'a') ? env->a : env->b, (int)env->size);
-	printf("median = %u\n", median);
-	tmp = (stack == 'a') ? env->a : env->b;
-	ret = 0;
 	i = 0;
-	while (tmp && i < env->size)
+	ret = 0;
+	median = get_median(env, size, 'a');
+	printf("mediane = %d\n", median);
+	while (check_values(env->a, median, 'a') && i < size)
 	{
-		if (stack == 'a')
+		if (env->a->val < median)
 		{
-			if (tmp->val < median)
-			{
-				if (push_on_b(env, tmp->val) != 0)
-					return (1);
-				ret++;
-				tmp = (stack == 'a') ? env->a : env->b;
-				i = 0;
-				continue ;
-			}
+			print_lst(env);
+			usleep(100000);
+			push_b(env);
+			moves_buffer("pb\n", 0);
+			ret++;
 		}
-		else if (stack == 'b')
-			if (tmp->val > median)
-			{
-				if (push_on_a(env, tmp->val) != 0)
-					return (1);
-				ret++;
-				tmp = (stack == 'a') ? env->a : env->b;
-				i = 0;
-				continue ;
-			}
+		else
+		{
+			rotate_a(env);
+			moves_buffer("ra\n", 0);
+		}
 		i++;
-		tmp = tmp->next;
 	}
-	if ((stack == 'a' ? push_on_b(env, median) : push_on_a(env, median)) != 0)
-		return (1);
-	return (ret);
+	push_on_b(env, median);
+	return (ret + 1);
 }
 
-int	quicksort(t_env *env)
+static inline unsigned int	partition_b(t_env *env, unsigned int size)
+{
+	int		median;
+	unsigned int	ret;
+	unsigned int	i;
+
+	i = 0;
+	ret = 0;
+	median = get_median(env, size, 'b');
+	printf("mediane = %d\n", median);
+	while (check_values(env->b, median, 'b') && i < size)
+	{
+		if (env->b->val > median)
+		{
+			print_lst(env);
+			usleep(100000);
+			push_a(env);
+			moves_buffer("pa\n", 0);
+			ret++;
+		}
+		else
+		{
+			rotate_b(env);
+			moves_buffer("rb\n", 0);
+		}
+		i++;
+	}
+	push_on_a(env, median);
+	return (ret + 1);
+}
+
+static inline int	rollback(t_env *env, unsigned int nb_push, char s)
+{
+	unsigned int	i;
+	
+	i = 0;
+	while (i < nb_push)
+	{
+		if (s == 'a')
+		{
+			push_b(env);
+			moves_buffer("pb\n", 0);
+		}
+		else
+		{
+			push_a(env);
+			moves_buffer("pa\n", 0);
+		}
+		i++;
+	}
+	return (0);
+}
+
+static inline int	qsorting(t_env *env, unsigned int size, char s)
 {
 	unsigned int	nb_push;
 
-	printf("stack = %c\nsize = %d\n\n", env->stack, env->size);
+	printf("quicksort sur %c\nsize = %d\n", s, size);
 	print_lst(env);
-	sleep(1);
-	printf("\n");
+	usleep(100000);
 	nb_push = 0;
-	if (env->size > 3)
+	if (size > 2)
 	{
-		nb_push = partition(env, env->stack);
-		env->size = ps_lstlen(env->stack == 'a' ? env->a : env->b);
-		quicksort(env);
-		env->stack = (env->stack == 'a' ? 'b' : 'a');
-		env->size = ps_lstlen(env->stack == 'a' ? env->a : env->b) - nb_push;
-		quicksort(env);
+		//Partitioner la stack actuelle
+		printf("size > 2 : partition sur %c\n", s);
+		nb_push = (s == 'a') ? partition_a(env, size) : partition_b(env, size);
+
+		// Relancer qsort sur la meme stack
+		qsorting(env, size - nb_push, s);
+		
+		// Relancer qsort sur la stack opposee
+		s = (s == 'a') ? 'b' : 'a'; // Changement de stack
+		qsorting(env, nb_push, s);
 	}
-	if (q_three_sort_a(env) != 0)
-		return (-1);
-	if (env->a->val > env->a->next->val)
+	else if (size == 2 && ((s == 'a' && env->a->val > env->a->next->val) || (s == 'b' && env->b->val < env->b->next->val)))
 	{
-		moves_buffer((env->stack == 'a' ? "sa\n" : "sb\n"), 0);
-		if (env->stack == 'a')
+		if (s == 'a')
+		{
 			swap_a(env);
+			moves_buffer("sa\n", 0);
+		}
 		else
+		{
 			swap_b(env);
+			moves_buffer("sb\n", 0);
+		}
 	}
-	while (env->size > 0)
-	{
-		moves_buffer((env->stack == 'a' ? "pa\n" : "pb\n"), 0);
-		if (env->stack == 'a')
-			push_a(env);
-		else if (env->stack == 'b')
-			push_b(env);
-		env->size--;
-	}
+	rollback(env, nb_push, s);
+	return (0);
+}
+
+int	quicksort(t_env *env) // Wrapper around the real quicksort function
+{
+	if (qsorting(env, env->size_a, env->stack) == -1)
+		return (-1);
 	return (0);
 }

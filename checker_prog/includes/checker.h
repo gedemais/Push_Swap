@@ -17,44 +17,44 @@ typedef struct s_stack	t_stack;
 
 struct	s_stack
 {
-	t_stack	*next;
-	int	val;
-	int	_pad;
+	t_stack		*next;
+	int		val;
+	int		_pad;
 };
 
-typedef struct	s_env
+typedef struct		s_env
 {
-	t_stack	*a;
-	t_stack	*b;
-	int	*moves;
-	unsigned int		nb_push;
-	unsigned int	size;
-	unsigned int	_pad;
+	t_stack		*a;
+	t_stack		*b;
+	int		*moves;
+	unsigned int	nb_push;
+	unsigned int	size_a;
+	unsigned int	size_b;
 	char		stack;
-	char		s[3];
-}		t_env;
+	char		_pad[3];
+}			t_env;
 
-void		free_stacks(t_env *env);
-int		run_instructions(t_env *env);
-int		init_stack(t_env *env, long long int *stack, int len);
-long long int	*get_numbers(int argc, char **argv, unsigned int len);
-int		start_check(int argc, char **argv);
-long long int	*parsing(int argc, char **argv, int *len);
+void			free_stacks(t_env *env);
+int			run_instructions(t_env *env);
+int			init_stack(t_env *env, long long int *stack, int len);
+int			start_check(int argc, char **argv);
+long long int		*get_numbers(int argc, char **argv, unsigned int len);
+long long int		*parsing(int argc, char **argv, int *len);
 
 /*
 ** Instructions
 */
-void		push_a(t_env *env);
-void		push_b(t_env *env);
-void		swap_a(t_env *env);
-void		swap_b(t_env *env);
-void		swap_s(t_env *env);
-void		rotate_a(t_env *env);
-void		rotate_b(t_env *env);
-void		rotate_s(t_env *env);
-void		reverse_rotate_a(t_env *env);
-void		reverse_rotate_b(t_env *env);
-void		reverse_rotate_s(t_env *env);
+void			push_a(t_env *env);
+void			push_b(t_env *env);
+void			swap_a(t_env *env);
+void			swap_b(t_env *env);
+void			swap_s(t_env *env);
+void			rotate_a(t_env *env);
+void			rotate_b(t_env *env);
+void			rotate_s(t_env *env);
+void			reverse_rotate_a(t_env *env);
+void			reverse_rotate_b(t_env *env);
+void			reverse_rotate_s(t_env *env);
 
 void			print_lst(t_env *env);
 #endif
