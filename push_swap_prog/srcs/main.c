@@ -38,11 +38,12 @@ void			print_lst(t_env *env)
 static inline int	choose_sort_algo(t_env *env, int len)
 {
 	(void)env;
-	if (len <= 3)
+	(void)len;
+/*	if (len <= 3)
 		return (A_THREESORT);
 	else if (len <= 10)
 		return (A_SELECTION);
-	else
+	else*/
 		return (A_QUICKSORT);
 }
 

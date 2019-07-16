@@ -80,7 +80,7 @@ int			main(int argc, char **argv)
 	if (ret == -1)
 		ft_putendl_fd("Error", STDERR_FILENO);
 	else if (ret == 1)
-		ft_putendl("KO");
+		ft_putendl_fd("KO", 2);
 	else if (ret == 0)
 	{
 		ft_putendl("OK");
