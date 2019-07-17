@@ -30,7 +30,7 @@ int			push_on_b(t_env *env, int val)
 			moves_buffer("ra\n", 0);
 			rotate_a(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 			index--;
 		}
 	else
@@ -39,13 +39,13 @@ int			push_on_b(t_env *env, int val)
 			moves_buffer("rra\n", 0);
 			reverse_rotate_a(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 			index++;
 		}
 	moves_buffer("pb\n", 0);
 	push_b(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 	
 	return (0);
 }
@@ -63,7 +63,7 @@ int			push_on_a(t_env *env, int val)
 			moves_buffer("rb\n", 0);
 			rotate_b(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 			index--;
 		}
 	else
@@ -72,12 +72,12 @@ int			push_on_a(t_env *env, int val)
 			moves_buffer("rrb\n", 0);
 			reverse_rotate_b(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 			index++;
 		}
 	moves_buffer("pa\n", 0);
 	push_a(env);
 	//print_lst(env);
-	//usleep(10000);
+	////usleep(10000);
 	return (0);
 }

@@ -15,7 +15,7 @@ int	sort_stacks(t_env *env, int algo)
 			(*sort_fts[i])(env);
 		i++;
 	}
-//	moves_buffer(NULL, 1);
+	moves_buffer(NULL, 1);
 //	print_lst(env);
 	return (0);
 }
