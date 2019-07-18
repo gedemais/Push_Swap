@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-static inline int	*realloc_buff(int *buff, unsigned int size)
+static inline int		*realloc_buff(int *buff, unsigned int size)
 {
 	int	*new;
 
@@ -12,7 +12,7 @@ static inline int	*realloc_buff(int *buff, unsigned int size)
 	return (new);
 }
 
-static inline int	parse_instruction(char *move)
+static inline int		parse_instruction(char *move)
 {
 	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
 					"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
@@ -30,7 +30,7 @@ static inline int	parse_instruction(char *move)
 	return (-1);
 }
 
-static inline void	write_buffer(int *buff, unsigned int size)
+static inline void		write_buffer(int *buff, unsigned int size)
 {
 	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
 					"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
@@ -53,6 +53,16 @@ static inline void	write_buffer(int *buff, unsigned int size)
 	}
 }
 
+static inline unsigned int	buff_len(int *buff)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (buff[i] != 0)
+		i++;
+	return (i);
+}
+
 int	moves_buffer(char *move, int flush)
 {
 	static int		*buff = NULL;
@@ -66,7 +76,12 @@ int	moves_buffer(char *move, int flush)
 		ft_memset(buff, 0, sizeof(int) * size);
 	}
 	if (flush == 1)
-		write_buffer(optimize_buff(buff), index);
+	{
+		if (!(buff = optimize_buff(buff)))
+			return (-1);
+		write_buffer(buff, buff_len(buff));
+	
+	}
 	else
 	{
 		if ((buff[index] = parse_instruction(move)) == -1)

@@ -1,167 +1,223 @@
-import Pygame
-import pygame.gfxdraw
+#!/usr/bin/env python3
 
-class Circular_linked_list(list):
-	def swap_top(self):
-		a = self.pop()
-		b = self.pop()
-		self.append(a)
-		self.append(b)
-	
-	def rotate(self):
-		a = self.pop()
-		self.insert(0, a)
-	
-	def reverse_rotate(self):
-		a = self.pop(0)
-		self.append(a)
 
-class UnknownOp(Exception):	pass
+from tkinter import *
+import sys
+import time
+import subprocess
+import os
+from math import sqrt
 
-class Two_stacks:
-	def __init__(self, list, verbose=False):
-		self.a = Circular_linked_list(list)
-		self.b = Circular_linked_list()
-		if verbose:
-			print("Initial state: %s" % str(self))
-	
-	def __str__(self):
-		return "A = %s, B = %s" % (str(self.a), str(self.b))
-	
-	def do_op(self, op, verbose=False):
-		if verbose:
-			print("Applying %s: %s" % (op, str(self)))
-		if op == "sa":
-			self.a.swap_top()
-		elif op == "sb":
-			self.b.swap_top()
-		elif op == "ss":
-			self.a.swap_top()
-			self.b.swap_top()
-		elif op == "pa":
-			self.a.append(self.b.pop())
-		elif op == "pb":
-			self.b.append(self.a.pop())
-		elif op == "ra":
-			self.a.rotate()
-		elif op == "rb":	
-			self.b.rotate()
-		elif op == "rr":
-			self.a.rotate()
-			self.b.rotate()
-		elif op == "rra":
-			self.a.reverse_rotate()
-		elif op == "rrb":
-			self.b.reverse_rotate()
-		elif op == "rrr":
-			self.a.reverse_rotate()
-			self.b.reverse_rotate()
-		else:
-			raise UnknownOp
-	
-	def is_sorted(self):
-		if len(self.b) > 0:
-			return False
-		a = self.a
-		for i, v in enumerate(a[:-1]):
-			if a[i + 1] > v:
-				return False
-		return True
 
-class Canvas:
-	def __init__(self, width, height, title):
-		pygame.init()
-		self.screen = pygame.display.set_mode((width, height), pygame.HWSURFACE | pygame.DOUBLEBUF)
-		self.width = width
-		self.height = height
-		self.clear()
-	
-	def clear(self):
-		self.screen.fill((255, 255, 255))
-	
-	def conv_coord(self, x, y):
-		new_x = int((x + .5) * self.width)
-		new_y = int(y * self.width + self.height / 2)
-		return new_x, new_y
+"""
+__project__ = "push_swap visualizer"
+__author__ = "Emmanuel Ruaud"
+__email__ = "eruaud@student.le-101.fr"
+This python script was created to visualize your work with the PUSH_SWAP
+42 Project.
+You must put this script in the same path or in a sibling path of your program
+Of course you need Python3 with the builtin Tkinter.
+You can install it with Brew.
+--> Brew install python3
+Execute the script with :
+--> python3 pyviz.py `ruby -e "puts (-200..200).to_a.shuffle.join(' ')"`
+You can change the PUSHS_PATH to get to the relative path of your push_swap
+You can decrease or increase the speed with the matching buttons.
+"""
 
-	def line(self, x1, y1, x2, y2):
-		p1 = self.conv_coord(x1, y1)
-		p2 = self.conv_coord(x2, y2)
-		pygame.draw.lines(self.screen, (0, 0, 0), False, [p1, p2], 1)
-	
-	def circle(self, x, y, r):
-		r = int(r * self.width)
-		if (r > 0):
-			p = self.conv_coord(x, y)
-			if (r <= 1):
-				pygame.gfxdraw.pixel(self.screen, p[0], p[1], (1, 1, 1))
-			else:
-				pygame.gfxdraw.filled_circle(self.screen, p[0], p[1], r, (1, 1, 1))
-				pygame.gfxdraw.aacircle(self.screen, p[0], p[1], r, (1, 1, 1))
-	
-	def show(self):
-		pygame.display.update(self.screen.get_rect())
 
-def repr_cll(cll):
-	from math import pi, cos, sin
-	perimeter = sum(cll) * 2.
-	main_radius = perimeter / (2. * pi)
-	main_circle = (0, 0, main_radius)
-	circles = []
-	s = 0.
-	for i, n in enumerate(cll):
-		s -= float(cll[i])
-		angle = s * 2. * pi / perimeter
-		x = main_radius * cos(angle)
-		y = main_radius * sin(angle)
-		radius = float(cll[i])
-		circles.append((x, y, radius))
-		s -= float(cll[i])
-	return (main_circle, circles)
+RELATIVE_PATH = r'../push_swap_prog'
 
-def draw_cll(canvas, cll_repr, xshift, xfact, fact):
-	_, circles = cll_repr
-	for circle in circles:
-		x, y, radius = circle
-		canvas.circle((x * xfact + xshift) * fact, y * fact, radius * fact)
 
-def draw(canvas, ts):
-	c1 = repr_cll(ts.a)
-	c2 = repr_cll(ts.b)
-	r1 = c1[0][2]
-	r2 = c2[0][2]
-	x1 = -r1 - .5
-	x2 = -r2 - .5
-	width = 2.2 * (r1 + r2)
-	height = max(r1, r2) * 2.2
-	h_fact = 1. / float(width)
-	v_fact = (float(canvas.height) / float(canvas.width)) / height
-	fact = min(h_fact, v_fact)
-	canvas.clear()
-	draw_cll(canvas, c1, -r2 * 1.1, 1., fact)
-	draw_cll(canvas, c2, r1 * 1.1, -1., fact)
-	canvas.show()
+class PsGui:
+    def __init__(self, master):
+        ww = 600
+        wh = 600
+        self.i = 0
+        self.speed = 0
+        dirname = os.path.dirname(os.path.abspath(__file__))
+        PUSHS_PATH = os.path.join(dirname, RELATIVE_PATH)
+        self.pile_a = [int(num) for num in sys.argv[1:]]
+        self.first_pile = self.pile_a[:]
+        self.pile_b = []
+        self.cmds = subprocess.check_output([PUSHS_PATH] + sys.argv[1:], stderr=subprocess.STDOUT,
+                                            timeout=12).splitlines()
+        if len(self.pile_a) != 0:
+            self.prespeed = 1 / len(self.pile_a)
+        else:
+            self.prespeed = 0
+        self.master = master
+        master.title("Push_swap viewer")
+        self.mainframe = Frame(master)
+        self.mainframe.pack(fill=BOTH)
+        self.can = Canvas(self.mainframe, width=ww, height=wh, bg="black")
+        self.can.pack(side=LEFT)
+        self.toolframe = Frame(self.mainframe)
+        self.toolframe.pack(side=RIGHT, fill=BOTH)
+        self.butframe = Frame(self.toolframe)
+        self.butframe.pack(side=TOP, fill=Y)
+        self.PrevCtl = Button(self.butframe, text="<<", command=self.speed_down)
+        self.PrevCtl.pack(side=LEFT)
+        self.PauseCtl = Button(self.butframe, text=">", command=self.pause)
+        self.PauseCtl.pack(side=LEFT)
+        self.NextCtl = Button(self.butframe, text=">>", command=self.speed_up)
+        self.NextCtl.pack(side=LEFT)
+        self.ResetCtl = Button(self.butframe, text="R", command=self.reset)
+        self.ResetCtl.pack(side=LEFT)
+        self.listbox = Listbox(self.toolframe, bg='black', fg='light cyan',
+                               font=("monospace", 12), relief=FLAT)
+        self.listbox.pack(fill=BOTH, expand=1)
+        for cmd in self.cmds:
+            self.listbox.insert(END, cmd)
+        self.statusframe = Frame(master)
+        self.statusframe.pack(side=BOTTOM, fill=X)
+        self.speedmeter = Label(self.statusframe,
+                                text='frame rate = ' + str(self.speed),
+                                font=("monospace", 10))
+        self.speedmeter.pack(side=LEFT)
+        self.totalcount = Label(self.statusframe,
+                                text='- operations = ' + str(len(self.cmds)),
+                                font=("monospace", 10))
+        self.totalcount.pack(side=LEFT)
+        self.draw_rectangles()
+        self.launch()
 
-if __name__ == "__main__":
-	from sys import argv, stdin, exit
-	from time import sleep
+    def reset(self):
+        self.speed = 0
+        self.i = 0
+        del self.pile_a[:]
+        self.pile_a = self.first_pile[:]
+        del self.pile_b[:]
+        self.can.delete("all")
+        self.draw_rectangles()
+        self.listbox.see(0)
+        self.PauseCtl.config(text='>')
+        self.launch()
 
-	if len(argv) > 1 and argv[1] == "-v":
-		verbose = True
-		list_of_numbers = [int(i) for i in argv[:1:-1]]
-	else:
-		verbose = False
-		list_of_numbers = [int(i) for i in argv[:0:-1]]
-	i = list_of_numbers[::1]
-	i.sort()
-	list_of_numbers = [i.index(n) + 1 for n in list_of_numbers]
-	ts = Two_stacks(list_of_numbers, verbose)
-	canvas = Canvas(1920, 1080, 'push_swap checker')
-	for op in stdin:
-		for event in pygame.event.get():
-			pass
-		op = op.rstrip('\n')
-		ts.do_op(op.rstrip('\n'), verbose)
-		draw(canvas, ts)
-	print("OK" if ts.is_sorted() else "KO")
-	pygame.quit()
+    def pause(self):
+        if self.speed != 0:
+            self.prespeed = self.speed
+            self.speed = 0
+            self.speedmeter.config(text='frame rate = 0')
+            self.PauseCtl.config(text='>')
+        else:
+            self.speed = self.prespeed
+            self.speedmeter.config(text='frame rate = ' \
+                                        + '{:.2e}'.format(self.speed))
+            self.PauseCtl.config(text='||')
+
+    def speed_up(self):
+        if self.speed == 0:
+            self.PauseCtl.config(text='||')
+            self.speed = self.prespeed
+        self.speed = self.speed ** 2
+        self.speedmeter.config(text='frame rate = ' \
+                                    + '{:.2e}'.format(self.speed))
+
+    def speed_down(self):
+        self.speed = sqrt(self.speed)
+        self.speedmeter.config(text='frame rate = ' \
+                                    + '{:.2e}'.format(self.speed))
+
+    def launch_cmds(self, cmd):
+        if cmd == b'sa' and len(self.pile_a) >= 2:
+            self.pile_a[0], self.pile_a[1] = self.pile_a[1], self.pile_a[0]
+        if cmd == b'sb' and len(self.pile_b) >= 2:
+            self.pile_b[0], self.pile_b[1] = self.pile_b[1], self.pile_b[0]
+        if cmd == b'ss':
+            if (len(self.pile_a) >= 2):
+                self.pile_a[0], self.pile_a[1] = self.pile_a[1], self.pile_a[0]
+            if (len(self.pile_b) >= 2):
+                self.pile_b[0], self.pile_b[1] = self.pile_b[1], self.pile_b[0]
+        if cmd == b'ra' and len(self.pile_a) >= 2:
+            self.pile_a.append(self.pile_a[0])
+            del self.pile_a[0]
+        if cmd == b'rb' and len(self.pile_b) >= 2:
+            self.pile_b.append(self.pile_b[0])
+            del self.pile_b[0]
+        if cmd == b'rr':
+            if (len(self.pile_a) >= 2):
+                self.pile_a.append(self.pile_a[0])
+                del self.pile_a[0]
+            if (len(self.pile_b) >= 2):
+                self.pile_b.append(self.pile_b[0])
+                del self.pile_b[0]
+        if cmd == b'rra' and len(self.pile_a) >= 2:
+            self.pile_a = [self.pile_a[-1]] + self.pile_a
+            del self.pile_a[-1]
+        if cmd == b'rrb' and len(self.pile_b) >= 2:
+            self.pile_b = [self.pile_b[-1]] + self.pile_b
+            del self.pile_b[-1]
+        if cmd == b'rrr':
+            if (len(self.pile_a) >= 2):
+                self.pile_a = [self.pile_a[-1]] + self.pile_a
+                del self.pile_a[-1]
+            if (len(self.pile_b) >= 2):
+                self.pile_b = [self.pile_b[-1]] + self.pile_b
+                del self.pile_b[-1]
+        if cmd == b'pa' and len(self.pile_b) >= 1:
+            self.pile_a = [self.pile_b[0]] + self.pile_a
+            del self.pile_b[0]
+        if cmd == b'pb' and len(self.pile_a) >= 1:
+            self.pile_b = [self.pile_a[0]] + self.pile_b
+            del self.pile_a[0]
+        return self.pile_a, self.pile_b
+
+    def set_color(self, index):
+        col = '#%02x%02x%02x' % (int(255 * (index - 0.3) * (index > 0.3)),
+                                 int(255 * index
+                                     - ((510 * (index - 0.6)) * (index > 0.6))),
+                                 int((255 - 510 * index) * (index < 0.5)))
+        return col
+
+    def draw_rectangles(self):
+        vi = 0
+        ww = 600
+        wh = 600
+        hw = ww / 2
+        hm = len(self.pile_a) + len(self.pile_b)
+        mx, mn = (0, 0)
+        if (hm != 0):
+            mx = max(self.pile_a + self.pile_b)
+            mn = min(self.pile_a + self.pile_b)
+        rects = []
+        if len(self.pile_a) > 0:
+            a_val = [(num - mn) / (mx - mn) for num in self.pile_a]
+            for vala in a_val:
+                rects.append(self.can.create_rectangle(0, vi,
+                                                       10 + vala * (hw - 100), vi + wh / hm,
+                                                       fill=self.set_color(vala), outline=""))
+                vi += wh / hm
+        vi = 0
+        if len(self.pile_b) > 0:
+            b_val = [(num - mn) / (mx - mn) for num in self.pile_b]
+            for valb in b_val:
+                rects.append(self.can.create_rectangle(hw, vi,
+                                                       hw + 10 + valb * (hw - 100), vi + wh / hm,
+                                                       fill=self.set_color(valb), outline=""))
+                vi += wh / hm
+
+    def launch(self):
+        while self.i < len(self.cmds):
+            if self.speed != 0:
+                while self.i < len(self.cmds):
+                    self.listbox.activate(self.i)
+                    self.can.delete("all")
+                    self.pile_a, self.pile_b = \
+                        self.launch_cmds(self.cmds[self.i])
+                    self.draw_rectangles()
+                    time.sleep(2 * self.speed)
+                    self.can.update()
+                    self.listbox.yview_scroll(1, 'units')
+                    self.i += 1
+                    if self.speed == 0:
+                        break
+            time.sleep(0.25)
+            self.can.update()
+        self.PauseCtl.config(text='>')
+
+
+root = Tk()
+root.resizable(width=False, height=False)
+gui = PsGui(root)
+root.mainloop()

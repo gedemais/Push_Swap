@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_numbers.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/18 04:46:50 by gedemais          #+#    #+#             */
+/*   Updated: 2019/07/18 05:04:10 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/checker.h"
 
 static inline int	is_number_start(char *arg, unsigned int j)
@@ -13,10 +25,10 @@ static inline int	is_number_start(char *arg, unsigned int j)
 	return (0);
 }
 
-long long int	*get_numbers(int argc, char **argv, unsigned int len)
+long long int		*get_numbers(int argc, char **argv, unsigned int len)
 {
 	long long int	*stack;
-	unsigned int	i;
+	int		i;
 	int		j;
 	int		k;
 

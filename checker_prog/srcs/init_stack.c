@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_stack.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/18 05:01:00 by gedemais          #+#    #+#             */
+/*   Updated: 2019/07/18 05:04:02 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/checker.h"
 
 static inline void	lstdel(t_stack *stack)
@@ -28,8 +40,8 @@ static inline t_stack	*lstnew(long long int stack)
 
 int			init_stack(t_env *env, long long int *stack, int len)
 {
-	unsigned int	i;
 	t_stack		*tmp;
+	unsigned int	i;
 
 	i = 1;
 	env->b = NULL;

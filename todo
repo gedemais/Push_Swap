@@ -1,5 +1,7 @@
-Checker :
-Read les moves sur stdin et les parser
+Checker le sujet
 
-Push_Swap :
-Parser les parametres dans argv
+q_three_sort_b
+
+Leaks
+fsanitize
+tests blindes

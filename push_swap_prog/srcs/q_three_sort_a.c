@@ -73,3 +73,26 @@ int	q_three_sort_a(t_env *env)
 		case_six(env);
 	return (0);
 }
+
+/*
+
+int	q_three_sort_b(t_env *env)
+{
+	int	a;
+	int	b;
+	int	c;
+
+	if (!env->b || !env->b->next || !env->b->next->next)
+		return (-1);
+	a = env->b->val;
+	b = env->b->next->val;
+	c = env->b->next->next->val;
+	if (a > b && b > c && a > c) // sa rra
+		return (0);
+	else if (a > b && b < c && a > c) // ra
+	else if (a < b && b > c && a > c) // rra
+	else if (a > b && b < c && a < c)
+	else if (a < b && b > c && a < c)
+	else if (a < b && b < c && a < c)
+	return (0);
+}*/

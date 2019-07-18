@@ -159,6 +159,22 @@ static inline void	replace_stack(t_env *env, unsigned int size, char s)
 	}
 }
 
+static inline int			check_stack(t_env *env)
+{
+	t_stack		*tmp;
+
+	if (!env || env->b)
+		return (-1);
+	tmp = env->a;
+	while (tmp->next)
+	{
+		if (tmp->val > tmp->next->val)
+			return (-1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 static inline int	qsorting(t_env *env, unsigned int size, char s)
 {
 	unsigned int	nb_push;
@@ -166,6 +182,8 @@ static inline int	qsorting(t_env *env, unsigned int size, char s)
 
 	nb_rot = 0;
 	nb_push = 0;
+	if (check_stack(env) == 0)
+		return (0);
 	if (size > 2)
 	{
 		nb_push = (s == 'a') ? partition_a(env, size, &nb_rot) : partition_b(env, size, &nb_rot);

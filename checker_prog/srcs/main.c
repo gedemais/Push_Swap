@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/18 05:05:29 by gedemais          #+#    #+#             */
+/*   Updated: 2019/07/18 06:30:29 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/checker.h"
 
 void			print_lst(t_env *env)
@@ -34,7 +46,7 @@ void			print_lst(t_env *env)
 	ft_putchar('\n');
 }
 
-static inline	int	check_stack(t_env *env)
+static inline int			check_stack(t_env *env)
 {
 	t_stack		*tmp;
 
