@@ -26,6 +26,7 @@ int		q_three_sort_a(t_env *env);
 int		push_on_a(t_env *env, int val);
 int		push_on_b(t_env *env, int val);
 int		*optimize_buff(int *buff);
+bool		check_stop(t_env *env);
 int		quicksort(t_env *env);
 int		selection_sort(t_env *env);
 int		three_sort_a(t_env *env);

@@ -12,7 +12,6 @@ SRCS_NAME = 	main.c\
 		start_check.c\
 		selection_sort.c\
 		utils.c\
-		quicksort_utils.c\
 		get_numbers.c\
 		sort_processes.c\
 	    	init_stack.c\

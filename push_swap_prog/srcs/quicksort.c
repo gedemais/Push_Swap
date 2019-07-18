@@ -38,14 +38,11 @@ static inline int		get_median(t_env *env, unsigned int size, char s)
 	tmp = (s == 'a') ? env->a : env->b;
 	while (tmp && i < (int)size)
 	{
-		//printf("      | %d\n", tmp->val);
 		average += tmp->val;
 		tmp = tmp->next;
 		i++;
 	}
-	//printf("Sum = %f\n", (double)average);
 	average /= i;
-	//printf("Average = %f\n", (double)average);
 	return (find_closest_node(env, size, s, average));
 }
 
@@ -65,25 +62,18 @@ static inline unsigned int	check_values(t_stack *stack, int median, char s)
 	return (0);
 }
 
-static inline unsigned int	partition_a(t_env *env, unsigned int size)
+static inline unsigned int	partition_a(t_env *env, unsigned int size, unsigned int *nb_rot)
 {
 	int		median;
 	unsigned int	ret;
-	unsigned int	i;
 
-	i = 0;
 	ret = 0;
 	median = get_median(env, size, 'a');
-	//printf("mediane = %d\n", median);
-	while (check_values(env->a, median, 'a') && i < size)
-	{
-		if (env->a->val < median)
+	while (check_values(env->a, median, 'a'))
+		if (env->a->val <= median)
 		{
 			push_b(env);
 			moves_buffer("pb\n", 0);
-			i = 0;
-	//print_lst(env);
-	//usleep(10000);
 			ret++;
 			continue ;
 		}
@@ -91,37 +81,23 @@ static inline unsigned int	partition_a(t_env *env, unsigned int size)
 		{
 			rotate_a(env);
 			moves_buffer("ra\n", 0);
-	//print_lst(env);
-	//usleep(10000);
+			(*nb_rot)++;
 		}
-		i++;
-	}
-	push_on_b(env, median);
-	//print_lst(env);
-	//usleep(10000);
-	return (ret + 1);
+	return (ret);
 }
 
-static inline unsigned int	partition_b(t_env *env, unsigned int size)
+static inline unsigned int	partition_b(t_env *env, unsigned int size, unsigned int *nb_rot)
 {
 	int		median;
 	unsigned int	ret;
-	unsigned int	i;
 
-	i = 0;
 	ret = 0;
 	median = get_median(env, size, 'b');
-	//printf("mediane = %d\n", median);
-	while (check_values(env->b, median, 'b') && i < size)
-	{
-		if (env->b->val > median)
+	while (check_values(env->b, median, 'b'))
+		if (env->b->val >= median)
 		{
 			push_a(env);
 			moves_buffer("pa\n", 0);
-			size++;
-			i = 0;
-	//print_lst(env);
-	//usleep(10000);
 			ret++;
 			continue ;
 		}
@@ -129,15 +105,9 @@ static inline unsigned int	partition_b(t_env *env, unsigned int size)
 		{
 			rotate_b(env);
 			moves_buffer("rb\n", 0);
-	//print_lst(env);
-	//usleep(10000);
+			(*nb_rot)++;
 		}
-		i++;
-	}
-	push_on_a(env, median);
-	//print_lst(env);
-	//usleep(10000);
-	return (ret + 1);
+	return (ret);
 }
 
 static inline void	two_sort(t_env *env)
@@ -159,66 +129,54 @@ static inline int	rollback(t_env *env, unsigned int nb_push, char s)
 	unsigned int	i;
 	
 	i = 0;
-	//printf("Rollback : %u\n", nb_push);
 	while (i < nb_push)
 	{
 		if (s == 'a')
 		{
 			push_b(env);
 			moves_buffer("pb\n", 0);
-	//print_lst(env);
-	//usleep(10000);
 		}
 		else
 		{
 			push_a(env);
 			moves_buffer("pa\n", 0);
-	//print_lst(env);
-	//usleep(10000);
 		}
 		i++;
 	}
 	return (0);
 }
 
+static inline void	replace_stack(t_env *env, unsigned int size, char s)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		s == 'a' ? reverse_rotate_a(env) : reverse_rotate_b(env);
+		moves_buffer(s == 'a' ? "rra\n" : "rrb\n", 0);
+		i++;
+	}
+}
+
 static inline int	qsorting(t_env *env, unsigned int size, char s)
 {
 	unsigned int	nb_push;
+	unsigned int	nb_rot;
 
-	//printf("quicksort sur %c\nsize = %d\n", s, size);
-	//print_lst(env);
-	//usleep(10000);
+	nb_rot = 0;
 	nb_push = 0;
-	if (size > 3)
+	if (size > 2)
 	{
-		//Partitioner la stack actuelle
-	//	printf("size > 2 : partition sur %c\n", s);
-	//print_lst(env);
-	//usleep(10000);
-		nb_push = (s == 'a') ? partition_a(env, size) : partition_b(env, size);
-
-	//print_lst(env);
-	//usleep(10000);
-		// Relancer qsort sur la meme stack
+		nb_push = (s == 'a') ? partition_a(env, size, &nb_rot) : partition_b(env, size, &nb_rot);
+		replace_stack(env, nb_rot, s);
 		qsorting(env, size - nb_push, s);
-		
-	//print_lst(env);
-	//usleep(10000);
-		// Relancer qsort sur la stack opposee
 		s = (s == 'a') ? 'b' : 'a'; // Changement de stack
-		qsorting(env, nb_push + 1, s);
-	//print_lst(env);
-	//usleep(10000);
+		qsorting(env, nb_push, s);
 	}
 	else if (size == 2)
-	{
 		two_sort(env);
-	//print_lst(env);
-	//usleep(10000);
-	}
 	rollback(env, nb_push, s);
-	//print_lst(env);
-	//usleep(10000);
 	return (0);
 }
 
