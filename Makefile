@@ -18,12 +18,12 @@ $(LIB) : $(LIB_PATH)
 
 $(CK_NAME) : $(CK_PATH)
 	@echo "Making Checker..."
-	@make -C $(CK_PATH) re
+	@make -C $(CK_PATH)
 	@mv $(CK_PATH)$(CK_NAME) ./
 
 $(PS_NAME) : $(PS_PATH)
 	@echo "Making Push_swap..."
-	@make -C $(PS_PATH) re
+	@make -C $(PS_PATH)
 	@mv $(PS_PATH)$(PS_NAME) ./
 
 clean :
@@ -33,6 +33,8 @@ clean :
 fclean : clean
 	@make -C $(CK_PATH) fclean
 	@make -C $(PS_PATH) fclean
+	@rm -rf push_swap.dSYM
+	@rm -rf checker.dSYM
 	@rm -rf $(CK_NAME)
 	@rm -rf $(PS_NAME)
 

@@ -29,6 +29,9 @@ long long int		*parsing(int argc, char **argv, int *len)
 	if (!(stack = get_numbers(argc, argv, (unsigned int)*len)))
 		return (NULL);
 	if (check_duplicates(stack, *len) == 1)
+	{
+		free(stack);
 		return (NULL);
+	}
 	return (stack);
 }

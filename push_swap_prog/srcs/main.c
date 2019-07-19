@@ -35,9 +35,8 @@ void			print_lst(t_env *env)
 	ft_putchar('\n');
 }
 
-static inline int	choose_sort_algo(t_env *env, int len)
+static inline int	choose_sort_algo(int len)
 {
-	(void)env;
 	if (len <= 3)
 		return (A_THREESORT);
 	else if (len <= 20)
@@ -59,7 +58,7 @@ static inline int	push_swap(int argc, char **argv)
 	if (init_stack(&env, stack, len) == -1)
 		return (-1);
 	free(stack);
-	if ((algo += choose_sort_algo(&env, len)) == -1)
+	if ((algo += choose_sort_algo(len)) == -1)
 		return (-1);
 	if (sort_stacks(&env, algo) == -1)
 		return (-1);
@@ -70,7 +69,9 @@ int			main(int argc, char **argv)
 {
 	int	ret;
 
-	if (argc < 2 || (ret = push_swap(argc, argv)) == -1)
+	if (argc < 2)
+		return (0);
+	if ((ret = push_swap(argc, argv)) == -1)
 	{
 		ft_putendl_fd("Error", STDERR_FILENO);
 		return (1);

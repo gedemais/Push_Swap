@@ -22,7 +22,6 @@
 # define RRB_ID 1024
 # define RRR_ID 2048
 
-int		q_three_sort_a(t_env *env);
 int		push_on_a(t_env *env, int val);
 int		push_on_b(t_env *env, int val);
 int		*optimize_buff(int *buff);

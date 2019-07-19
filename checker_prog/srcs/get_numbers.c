@@ -36,7 +36,7 @@ long long int		*get_numbers(int argc, char **argv, unsigned int len)
 	k = 0;
 	if (!(stack = (long long int*)malloc(sizeof(long long int) * len)))
 		return (NULL);
-	while (++i < (unsigned int)argc)
+	while (++i < argc)
 	{
 		j = -1;
 		while (argv[i][++j])

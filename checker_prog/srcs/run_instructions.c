@@ -33,6 +33,7 @@ int		run_instructions(t_env *env)
 		if (run_move(env, line) == -1)
 		{
 			free(line);
+			free_stacks(env);
 			return (-1);
 		}
 		free(line);
