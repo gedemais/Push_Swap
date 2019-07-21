@@ -1,6 +1,14 @@
 #include "../includes/checker.h"
 
-static inline int	run_move(t_env *env, char *line)
+bool			*visu(void)
+{
+	static bool	visu = false;
+
+	return (&visu);
+}
+
+
+static inline int	run_move(t_env *env, char *line, bool visu)
 {
 	unsigned int	i;
 	static char	*moves[NB_MOVES] = {"sa", "sb", "ss", "pa", "pb", "ra",
@@ -14,6 +22,11 @@ static inline int	run_move(t_env *env, char *line)
 		if (ft_strcmp(line, moves[i]) == 0)
 		{
 			(*moves_fts[i])(env);
+			if (visu)
+			{
+				print_lst(env);
+				usleep(V_DELAY * 1000);
+			}
 			return (0);
 		}
 		i++;
@@ -21,7 +34,7 @@ static inline int	run_move(t_env *env, char *line)
 	return (-1);
 }
 
-int		run_instructions(t_env *env)
+int		run_instructions(t_env *env, bool visu)
 {
 	char		*line;
 	int		ret;
@@ -30,7 +43,7 @@ int		run_instructions(t_env *env)
 	{
 		if (ret == -1)
 			return (-1);
-		if (run_move(env, line) == -1)
+		if (run_move(env, line, visu) == -1)
 		{
 			free(line);
 			free_stacks(env);
@@ -38,5 +51,6 @@ int		run_instructions(t_env *env)
 		}
 		free(line);
 	}
+	pad(0, true);
 	return (0);
 }

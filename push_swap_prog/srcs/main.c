@@ -1,40 +1,5 @@
 #include "../includes/push_swap.h"
 
-void			print_lst(t_env *env)
-{
-	t_stack		*tmp;
-
-	ft_putstr("A :");
-	if (env->a)
-	{
-		tmp = env->a;
-		while (tmp)
-		{
-			ft_putnbr(tmp->val);
-			ft_putchar(' ');
-			tmp = tmp->next;
-		}
-	}
-	else
-		ft_putstr("Empty\n");
-	ft_putchar('\n');
-	ft_putstr("B :");
-	if (env->b)
-	{
-		tmp = env->b;
-		while (tmp)
-		{
-			ft_putnbr(tmp->val);
-			ft_putchar(' ');
-			tmp = tmp->next;
-		}
-	}
-	else
-		ft_putstr("Empty\n");
-	ft_putchar('\n');
-	ft_putchar('\n');
-}
-
 static inline int	choose_sort_algo(int len)
 {
 	if (len <= 3)

@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 04:46:50 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/18 05:04:10 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:50:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ long long int		*get_numbers(int argc, char **argv, unsigned int len)
 	int		j;
 	int		k;
 
-	i = 0;
+	i = (*visu() ? 1 : 0);
 	k = 0;
 	if (!(stack = (long long int*)malloc(sizeof(long long int) * len)))
 		return (NULL);

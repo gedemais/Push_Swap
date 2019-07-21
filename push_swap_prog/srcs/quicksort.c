@@ -110,14 +110,14 @@ static inline unsigned int	partition_b(t_env *env, unsigned int size, unsigned i
 	return (ret);
 }
 
-static inline void	two_sort(t_env *env)
+static inline void	two_sort(t_env *env, char s)
 {
-	if (env->a->next && env->a->val > env->a->next->val)
+	if (env->a->next && env->a->val > env->a->next->val && s == 'a')
 	{
 		swap_a(env);
 		moves_buffer("sa\n", 0);
 	}
-	if (env->b->next && env->b->val < env->b->next->val)
+	if (env->b->next && env->b->val < env->b->next->val && s == 'b')
 	{
 		swap_b(env);
 		moves_buffer("sb\n", 0);
@@ -189,16 +189,16 @@ static inline int	qsorting(t_env *env, unsigned int size, char s)
 		nb_push = (s == 'a') ? partition_a(env, size, &nb_rot) : partition_b(env, size, &nb_rot);
 		replace_stack(env, nb_rot, s);
 		qsorting(env, size - nb_push, s);
-		s = (s == 'a') ? 'b' : 'a'; // Changement de stack
+		s = (s == 'a') ? 'b' : 'a';
 		qsorting(env, nb_push, s);
 	}
-	else if (size == 2)
-		two_sort(env);
+	if (size == 2)
+		two_sort(env, s);
 	rollback(env, nb_push, s);
 	return (0);
 }
 
-int	quicksort(t_env *env) // Wrapper around the real quicksort function
+int	quicksort(t_env *env)
 {
 	if (qsorting(env, env->size_a, env->stack) == -1)
 		return (-1);

@@ -6,45 +6,11 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:05:29 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/18 06:30:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/20 19:55:17 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
-
-void			print_lst(t_env *env)
-{
-	t_stack		*tmp;
-
-	ft_putstr("A :");
-	if (env->a)
-	{
-		tmp = env->a;
-		while (tmp)
-		{
-			ft_putnbr(tmp->val);
-			ft_putchar(' ');
-			tmp = tmp->next;
-		}
-	}
-	else
-		ft_putstr("Empty\n");
-	ft_putchar('\n');
-	ft_putstr("B :");
-	if (env->b)
-	{
-		tmp = env->b;
-		while (tmp)
-		{
-			ft_putnbr(tmp->val);
-			ft_putchar(' ');
-			tmp = tmp->next;
-		}
-	}
-	else
-		ft_putstr("Empty\n");
-	ft_putchar('\n');
-}
 
 static inline int			check_stack(t_env *env)
 {
@@ -73,7 +39,7 @@ static inline int	checker(int argc, char **argv)
 	if (init_stack(&env, stack, len) == -1)
 		return (-1);
 	free(stack);
-	if (run_instructions(&env) == -1)
+	if (run_instructions(&env, *visu()) == -1)
 		return (-1);
 	if (check_stack(&env) == -1)
 	{

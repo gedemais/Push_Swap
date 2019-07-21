@@ -8,6 +8,7 @@ SRCS_NAME = main.c\
 	    parsing.c\
 	    start_check.c\
 	    init_stack.c\
+	    print_lst.c\
 	    run_instructions.c\
 	    instruction_push_swap.c\
 	    instruction_rotate.c\

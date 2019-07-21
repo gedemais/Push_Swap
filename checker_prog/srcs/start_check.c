@@ -40,6 +40,8 @@ int			start_check(int argc, char **argv)
 	int		ret;
 
 	i = 1;
+	if (ft_strcmp(argv[i], "-v") == 0 && (*visu() = true))
+		i++;
 	nb_n = 0;
 	while (i < (unsigned int)argc)
 	{
