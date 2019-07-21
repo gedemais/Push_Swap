@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:28:59 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:29:00 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 23:11:20 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	swap_a(t_env *env)
 	t_stack	*tmp;
 
 	if (env->a == NULL || env->a->next == NULL)
-		return;
+		return ;
 	tmp = env->a;
 	env->a = env->a->next;
 	tmp->next = env->a->next;
@@ -53,7 +53,7 @@ void	swap_b(t_env *env)
 	t_stack	*tmp;
 
 	if (env->b == NULL || env->b->next == NULL)
-		return;
+		return ;
 	tmp = env->b;
 	env->b = env->b->next;
 	tmp->next = env->b->next;

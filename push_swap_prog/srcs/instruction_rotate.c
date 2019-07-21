@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:33 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:29:35 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 23:11:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rotate_a(t_env *env)
 	t_stack	*tmp2;
 
 	if (env->a == NULL || env->a->next == NULL)
-		return;
+		return ;
 	tmp = env->a;
 	env->a = env->a->next;
 	tmp2 = env->a;
@@ -34,7 +34,7 @@ void	rotate_b(t_env *env)
 	t_stack	*tmp2;
 
 	if (env->b == NULL || env->b->next == NULL)
-		return;
+		return ;
 	tmp = env->b;
 	env->b = env->b->next;
 	tmp2 = env->b;

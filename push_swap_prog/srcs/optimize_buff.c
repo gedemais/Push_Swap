@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:49 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:29:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 23:16:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,7 @@ static inline int	*optimize_rotate(int *buff, unsigned int i, bool *changed)
 		buff[i + 1] = -1;
 		*changed = true;
 	}
-	return (buff);
-}
-
-static inline int	*optimize_rrotate(int *buff, unsigned int i, bool *changed)
-{
-	if ((buff[i] == RR_ID && buff[i + 1] == RRR_ID)
+	else if ((buff[i] == RR_ID && buff[i + 1] == RRR_ID)
 		|| (buff[i] == RRR_ID && buff[i + 1] == RR_ID))
 	{
 		buff[i] = -1;
@@ -108,7 +103,6 @@ int	*optimize_buff(int *buff)
 			buff = optimize_push(buff, i, &changed);
 			buff = optimize_swap(buff, i, &changed);
 			buff = optimize_rotate(buff, i, &changed);
-			buff = optimize_rrotate(buff, i, &changed);
 			if (buff[i] == -1)
 			{
 				while (buff[i] != 0 && buff[i] == -1)

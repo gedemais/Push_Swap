@@ -15,15 +15,16 @@
 
 # define NB_MOVES 11
 
+# define CLEAR "\033[H\033[J"
 # define STOP "\033[0m"
 # define GRA "\033[1m"
 # define L_RED "\033[01;31m"
 # define L_GREEN "\033[01;32m"
+# define CYA "\033[01;36m"
 
-# define SS_MSG "The screen is too small.\nTry to resize or dezoom your window"
 # define V_C_BUFF_SIZE 4096
 # define V_P_BUFF_SIZE 8192
-# define V_DELAY 250
+# define V_DELAY 50
 # define V_PAD 30
 
 typedef struct s_stack	t_stack;

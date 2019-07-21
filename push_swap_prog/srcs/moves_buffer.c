@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:44 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:29:46 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 23:14:29 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static inline int		*realloc_buff(int *buff, unsigned int size)
 
 static inline int		parse_instruction(char *move)
 {
-	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
-					"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
+	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
+		"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
 	static int	ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
 					RA_ID, RB_ID, RR_ID, RRA_ID, RRB_ID, RRR_ID};
 	unsigned int	i;
@@ -44,8 +44,8 @@ static inline int		parse_instruction(char *move)
 
 static inline void		write_buffer(int *buff, unsigned int size)
 {
-	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n", "ra\n",
-					"rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
+	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
+		"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
 	static int	ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
 					RA_ID, RB_ID, RR_ID, RRA_ID, RRB_ID, RRR_ID};
 	unsigned int	i;
@@ -78,8 +78,8 @@ static inline unsigned int	buff_len(int *buff)
 int	moves_buffer(char *move, int flush)
 {
 	static int		*buff = NULL;
-	static unsigned int	size = 1024;
-	static unsigned int	index = 0;
+	static unsigned int		size = 1024;
+	static unsigned int		index = 0;
 
 	if (!buff)
 	{
@@ -92,16 +92,14 @@ int	moves_buffer(char *move, int flush)
 		if (!(buff = optimize_buff(buff)))
 			return (-1);
 		write_buffer(buff, buff_len(buff));
-	
 	}
 	else
 	{
 		if ((buff[index] = parse_instruction(move)) == -1)
 			return (-1);
 		index++;
-		if (index == size && (size *= 2))
-			if (!(buff = realloc_buff(buff, size)))
-				return (-1);
+		if (index == size && (size *= 2) && !(buff = realloc_buff(buff, size)))
+			return (-1);
 	}
 	return (0);
 }

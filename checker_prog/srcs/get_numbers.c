@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 04:46:50 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/20 19:50:22 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 22:59:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ static inline int	is_number_start(char *arg, unsigned int j)
 long long int		*get_numbers(int argc, char **argv, unsigned int len)
 {
 	long long int	*stack;
-	int		i;
-	int		j;
-	int		k;
+	int				i;
+	int				j;
+	int				k;
 
 	i = (*visu() ? 1 : 0);
 	k = 0;

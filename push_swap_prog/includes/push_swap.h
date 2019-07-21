@@ -22,18 +22,22 @@
 # define RRB_ID 1024
 # define RRR_ID 2048
 
+int		quicksort(t_env *env);
 int		q_three_sort(t_env *env, char s);
+int		selection_sort(t_env *env);
 int		push_on_a(t_env *env, int val);
 int		push_on_b(t_env *env, int val);
-int		*optimize_buff(int *buff);
-bool		check_stop(t_env *env);
-int		quicksort(t_env *env);
-int		selection_sort(t_env *env);
 int		three_sort_a(t_env *env);
 int		three_sort_b(t_env *env);
 unsigned int	ps_lstlen(t_stack *lst);
+int		find_closest_node(t_env *env, unsigned int size, char s, float target);
+int		get_median(t_env *env, unsigned int size, char s);
+unsigned int	check_values(t_stack *stack, int median, char s);
+unsigned int	partition_a(t_env *env, unsigned int size, unsigned int *nb_rot);
+unsigned int	partition_b(t_env *env, unsigned int size, unsigned int *nb_rot);
 
 int		sort_stacks(t_env *env, int algo);
 int		moves_buffer(char *move, int flush);
+int		*optimize_buff(int *buff);
 
 #endif
