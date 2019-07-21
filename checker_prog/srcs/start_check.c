@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/21 07:24:07 by gedemais          #+#    #+#             */
+/*   Updated: 2019/07/21 07:25:43 by gedemais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/checker.h"
 
 static inline int	is_unwanted(char c)
@@ -19,7 +31,6 @@ static inline int	is_wellsigned(char *arg, unsigned int j)
 	{
 		if (arg[j + 1] && ft_isdigit(arg[j + 1]))
 			return (0);
-	
 	}
 	return (-1);
 }

@@ -7,7 +7,6 @@ bool			*visu(void)
 	return (&visu);
 }
 
-
 static inline int	run_move(t_env *env, char *line, bool visu)
 {
 	unsigned int	i;

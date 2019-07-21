@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:05:29 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/20 19:55:17 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/21 07:18:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static inline int			check_stack(t_env *env)
+static inline int	check_stack(t_env *env)
 {
 	t_stack		*tmp;
 
