@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 01:38:30 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 02:02:56 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:05:07 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ long long int		*get_numbers(int argc, char **argv, unsigned int len)
 {
 	long long int	*stack;
 	unsigned int	i;
-	int		j;
-	int		k;
+	int				j;
+	int				k;
 
 	i = 0;
 	k = 0;

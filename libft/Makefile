@@ -6,7 +6,7 @@
 #    By: gedemais <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 17:34:45 by gedemais          #+#    #+#              #
-#    Updated: 2019/06/08 13:03:26 by gedemais         ###   ########.fr        #
+#    Updated: 2019/07/22 04:23:06 by gedemais         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,12 +109,11 @@ SRCS  =	ft_atoi.c \
 
 OBJS=$(SRCS:.c=.o)
 
-all: $(NAME) libft.h
+all: $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) libft.h
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
-	@echo "$(GRE)Done !$(DEF)"
 
 ./%.o: ./%.c
 	$(CC) $(FLAGS) -c $<

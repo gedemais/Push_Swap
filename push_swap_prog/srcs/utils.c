@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:30:42 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:30:44 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:39:25 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned int	ps_lstlen(t_stack *lst)
 {
-	t_stack		*tmp;
+	t_stack			*tmp;
 	unsigned int	ret;
 
 	ret = 0;

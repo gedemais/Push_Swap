@@ -6,20 +6,20 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:01:00 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:08:30 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:40:44 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-static inline void	lstdel(t_stack *stack)
+static inline void		lstdel(t_stack *stack)
 {
 	if (stack->next)
 		lstdel(stack->next);
 	free(stack);
 }
 
-void			free_stacks(t_env *env)
+void					free_stacks(t_env *env)
 {
 	if (env->a)
 		lstdel(env->a);
@@ -38,9 +38,9 @@ static inline t_stack	*lstnew(long long int stack)
 	return (a);
 }
 
-int			init_stack(t_env *env, long long int *stack, int len)
+int						init_stack(t_env *env, long long int *stack, int len)
 {
-	t_stack		*tmp;
+	t_stack			*tmp;
 	unsigned int	i;
 
 	i = 1;

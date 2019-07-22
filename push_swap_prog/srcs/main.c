@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:41 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:29:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:10:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static inline int	choose_sort_algo(int len)
 static inline int	push_swap(int argc, char **argv)
 {
 	long long int	*stack;
-	t_env		env;
-	int		algo;
-	int		len;
+	t_env			env;
+	int				algo;
+	int				len;
 
 	algo = 0;
 	if (!(stack = parsing(argc, argv, &len)))
@@ -42,7 +42,7 @@ static inline int	push_swap(int argc, char **argv)
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	int	ret;
 

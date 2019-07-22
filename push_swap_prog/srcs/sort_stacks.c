@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:30:26 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:30:28 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:37:51 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ static inline void	two_sort(t_env *env)
 	}
 }
 
-int			sort_stacks(t_env *env, int algo)
+int					sort_stacks(t_env *env, int algo)
 {
-	static unsigned int	algos[NB_ALGOS] = {A_SELECTION, A_QUICKSORT,
+	static unsigned int		algos[NB_ALGOS] = {A_SELECTION, A_QUICKSORT,
 					A_THREESORT};
-	static int		(*sort_fts[NB_ALGOS])(t_env*) = {selection_sort, quicksort,
-					three_sort_a};
-	unsigned int		i = 0;
+	static int				(*sort_fts[NB_ALGOS])(t_env*) = {selection_sort,
+			quicksort, three_sort_a};
+	unsigned int			i;
 
+	i = 0;
 	env->size_a = ps_lstlen(env->a);
 	env->size_b = 0;
 	env->stack = 'a';
@@ -37,7 +38,7 @@ int			sort_stacks(t_env *env, int algo)
 	else
 		while (i < NB_ALGOS)
 		{
-				if (algo == (int)algos[i])
+			if (algo == (int)algos[i])
 				(*sort_fts[i])(env);
 			i++;
 		}

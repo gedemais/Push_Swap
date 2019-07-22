@@ -6,16 +6,16 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:30:01 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:30:03 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:34:09 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static inline unsigned int	get_smallest(t_stack *stack)
+static inline unsigned int		get_smallest(t_stack *stack)
 {
-	t_stack		*tmp;
-	int		smallest;
+	t_stack			*tmp;
+	int				smallest;
 	unsigned int	ret;
 	unsigned int	i;
 
@@ -36,7 +36,7 @@ static inline unsigned int	get_smallest(t_stack *stack)
 	return (ret);
 }
 
-static inline int	push_smallest_on_b(t_env *env)
+static inline int				push_smallest_on_b(t_env *env)
 {
 	unsigned int	len;
 	unsigned int	index;
@@ -62,7 +62,7 @@ static inline int	push_smallest_on_b(t_env *env)
 	return (0);
 }
 
-int	selection_sort(t_env *env)
+int								selection_sort(t_env *env)
 {
 	while (ps_lstlen(env->a) > 3)
 		push_smallest_on_b(env);

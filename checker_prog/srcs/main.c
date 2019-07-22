@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:05:29 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:18:14 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 03:30:23 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static inline int	check_stack(t_env *env)
 static inline int	checker(int argc, char **argv)
 {
 	long long int	*stack;
-	t_env		env;
-	int		len;
+	t_env			env;
+	int				len;
 
 	if (!(stack = parsing(argc, argv, &len)))
 		return (-1);
@@ -50,10 +50,12 @@ static inline int	checker(int argc, char **argv)
 	return (0);
 }
 
-int			main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	int	ret;
 
+	if (argc < 2)
+			return (0);
 	ret = checker(argc, argv);
 	if (ret == -1)
 		ft_putendl_fd("Error", STDERR_FILENO);

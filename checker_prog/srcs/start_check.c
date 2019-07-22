@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:24:07 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:09:34 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:44:14 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static inline int	is_number_end(char *arg, unsigned int j)
 	return (0);
 }
 
-int			start_check(int argc, char **argv)
+int					start_check(int argc, char **argv)
 {
 	unsigned int	i;
 	unsigned int	j;
-	int		nb_n;
-	int		ret;
+	int				nb_n;
+	int				ret;
 
 	i = 1;
 	if (ft_strcmp(argv[i], "-v") == 0 && (*visu() = true))

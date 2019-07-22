@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:28:48 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:28:49 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:39:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static inline void	case_six(t_env *env, char stack)
 	}
 }
 
-int	three_sort_a(t_env *env)
+int					three_sort_a(t_env *env)
 {
 	int	a;
 	int	b;
@@ -70,7 +70,7 @@ int	three_sort_a(t_env *env)
 	return (0);
 }
 
-int	three_sort_b(t_env *env)
+int					three_sort_b(t_env *env)
 {
 	int	a;
 	int	b;

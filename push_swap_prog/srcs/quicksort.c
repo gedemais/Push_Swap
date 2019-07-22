@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:57 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:27:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:31:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static inline void	two_sort(t_env *env, char s)
 static inline int	rollback(t_env *env, unsigned int nb_push, char s)
 {
 	unsigned int	i;
-	
+
 	i = 0;
 	while (i < nb_push)
 	{
@@ -70,7 +70,8 @@ static inline int	qsorting(t_env *env, unsigned int size, char s)
 	nb_push = 0;
 	if (size > 2)
 	{
-		nb_push = (s == 'a') ? partition_a(env, size, &nb_rot) : partition_b(env, size, &nb_rot);
+		nb_push = (s == 'a') ? partition_a(env, size, &nb_rot)
+			: partition_b(env, size, &nb_rot);
 		replace_stack(env, nb_rot, s);
 		qsorting(env, size - nb_push, s);
 		s = (s == 'a') ? 'b' : 'a';
@@ -82,7 +83,7 @@ static inline int	qsorting(t_env *env, unsigned int size, char s)
 	return (0);
 }
 
-int	quicksort(t_env *env)
+int					quicksort(t_env *env)
 {
 	if (qsorting(env, env->size_a, env->stack) == -1)
 		return (-1);

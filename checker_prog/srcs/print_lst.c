@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:17:18 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 22:35:25 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:43:34 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/checker.h"
 
-void			pad(int size, bool free_mem)
+void				pad(int size, bool free_mem)
 {
 	static char	*pad_buff = NULL;
 
@@ -45,9 +45,9 @@ static inline int	color_elem(t_stack *node, char stack)
 	return (0);
 }
 
-void			draw_line(unsigned int size, bool free_mem)
+void				draw_line(unsigned int size, bool free_mem)
 {
-	static char	*line_buff = NULL;
+	static char		*line_buff = NULL;
 	unsigned int	i;
 
 	i = 0;
@@ -68,7 +68,7 @@ void			draw_line(unsigned int size, bool free_mem)
 	ft_putchar('\n');
 }
 
-static inline void			print_head(void)
+static inline void	print_head(void)
 {
 	ft_putchar('\n');
 	ft_putstr(CLEAR);
@@ -80,9 +80,9 @@ static inline void			print_head(void)
 	draw_line(V_PAD + 2, false);
 }
 
-void			print_lst(t_env *env)
+void				print_lst(t_env *env)
 {
-	int		pad_v;
+	int			pad_v;
 	t_stack		*a;
 	t_stack		*b;
 

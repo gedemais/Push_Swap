@@ -6,19 +6,20 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 23:17:05 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:25:19 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:30:00 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int		find_closest_node(t_env *env, unsigned int size, char s, float target)
+int				find_closest_node(t_env *env, unsigned int size, char s,
+				float target)
 {
-	t_stack		*tmp;
-	float		diff;
-	float		best_diff;
-	unsigned int	i;
-	int		ret;
+	t_stack				*tmp;
+	unsigned int		i;
+	float				diff;
+	float				best_diff;
+	int					ret;
 
 	i = 0;
 	best_diff = UINT_MAX;
@@ -39,11 +40,11 @@ int		find_closest_node(t_env *env, unsigned int size, char s, float target)
 	return (ret);
 }
 
-int		get_median(t_env *env, unsigned int size, char s)
+int				get_median(t_env *env, unsigned int size, char s)
 {
 	t_stack		*tmp;
 	float		average;
-	int		i;
+	int			i;
 
 	i = 0;
 	average = 0;
@@ -76,7 +77,7 @@ unsigned int	check_values(t_stack *stack, int median, char s)
 
 unsigned int	partition_a(t_env *env, unsigned int size, unsigned int *nb_rot)
 {
-	int		median;
+	int				median;
 	unsigned int	ret;
 
 	ret = 0;
@@ -100,7 +101,7 @@ unsigned int	partition_a(t_env *env, unsigned int size, unsigned int *nb_rot)
 
 unsigned int	partition_b(t_env *env, unsigned int size, unsigned int *nb_rot)
 {
-	int		median;
+	int				median;
 	unsigned int	ret;
 
 	ret = 0;
@@ -121,4 +122,3 @@ unsigned int	partition_b(t_env *env, unsigned int size, unsigned int *nb_rot)
 		}
 	return (ret);
 }
-

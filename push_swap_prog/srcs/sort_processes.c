@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:30:19 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:30:21 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:36:22 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static inline unsigned int	get_index(t_stack *stack, int val)
 {
 	unsigned int	i;
-	t_stack		*tmp;
+	t_stack			*tmp;
 
 	tmp = stack;
 	i = 0;
@@ -29,7 +29,7 @@ static inline unsigned int	get_index(t_stack *stack, int val)
 	return (0);
 }
 
-int			push_on_b(t_env *env, int val)
+int							push_on_b(t_env *env, int val)
 {
 	unsigned int	len;
 	unsigned int	index;
@@ -55,7 +55,7 @@ int			push_on_b(t_env *env, int val)
 	return (0);
 }
 
-int			push_on_a(t_env *env, int val)
+int							push_on_a(t_env *env, int val)
 {
 	unsigned int	len;
 	unsigned int	index;

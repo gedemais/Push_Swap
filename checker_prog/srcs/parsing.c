@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:15:48 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:15:50 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 02:58:01 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ long long int		*parsing(int argc, char **argv, int *len)
 	if (!(stack = get_numbers(argc, argv, (unsigned int)*len)))
 		return (NULL);
 	if (check_duplicates(stack, *len) == 1)
+	{
+		free(stack);
 		return (NULL);
+	}
 	return (stack);
 }

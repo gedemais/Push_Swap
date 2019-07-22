@@ -6,13 +6,13 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:44 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:14:29 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:20:53 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static inline int		*realloc_buff(int *buff, unsigned int size)
+static inline int			*realloc_buff(int *buff, unsigned int size)
 {
 	int	*new;
 
@@ -24,11 +24,11 @@ static inline int		*realloc_buff(int *buff, unsigned int size)
 	return (new);
 }
 
-static inline int		parse_instruction(char *move)
+static inline int			parse_instruction(char *move)
 {
-	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
+	static char		*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
 		"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
-	static int	ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
+	static int		ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
 					RA_ID, RB_ID, RR_ID, RRA_ID, RRB_ID, RRR_ID};
 	unsigned int	i;
 
@@ -42,12 +42,12 @@ static inline int		parse_instruction(char *move)
 	return (-1);
 }
 
-static inline void		write_buffer(int *buff, unsigned int size)
+static inline void			write_buffer(int *buff, unsigned int size)
 {
-	static char	*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
+	static char		*moves[NB_MOVES] = {"sa\n", "sb\n", "ss\n", "pa\n", "pb\n",
 		"ra\n", "rb\n", "rr\n", "rra\n", "rrb\n", "rrr\n"};
-	static int	ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
-					RA_ID, RB_ID, RR_ID, RRA_ID, RRB_ID, RRR_ID};
+	static int		ids[NB_MOVES] = {SA_ID, SB_ID, SS_ID, PA_ID, PB_ID,
+		RA_ID, RB_ID, RR_ID, RRA_ID, RRB_ID, RRR_ID};
 	unsigned int	i;
 	unsigned int	j;
 
@@ -75,9 +75,9 @@ static inline unsigned int	buff_len(int *buff)
 	return (i);
 }
 
-int	moves_buffer(char *move, int flush)
+int							moves_buffer(char *move, int flush)
 {
-	static int		*buff = NULL;
+	static int				*buff = NULL;
 	static unsigned int		size = 1024;
 	static unsigned int		index = 0;
 

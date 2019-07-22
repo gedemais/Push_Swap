@@ -6,20 +6,20 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:26:40 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 07:26:42 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:13:48 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-static inline void	lstdel(t_stack *stack)
+static inline void		lstdel(t_stack *stack)
 {
 	if (stack->next)
 		lstdel(stack->next);
 	free(stack);
 }
 
-void			free_stacks(t_env *env)
+void					free_stacks(t_env *env)
 {
 	if (env->a)
 		lstdel(env->a);
@@ -29,7 +29,7 @@ void			free_stacks(t_env *env)
 
 static inline t_stack	*lstnew(long long int stack)
 {
-	t_stack		*a;
+	t_stack			*a;
 
 	if (!(a = (t_stack*)malloc(sizeof(t_stack))))
 		return (NULL);
@@ -38,10 +38,10 @@ static inline t_stack	*lstnew(long long int stack)
 	return (a);
 }
 
-int			init_stack(t_env *env, long long int *stack, int len)
+int						init_stack(t_env *env, long long int *stack, int len)
 {
+	t_stack			*tmp;
 	unsigned int	i;
-	t_stack		*tmp;
 
 	i = 1;
 	env->b = NULL;

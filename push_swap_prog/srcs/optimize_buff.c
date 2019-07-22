@@ -6,7 +6,7 @@
 /*   By: gedemais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/21 07:29:49 by gedemais          #+#    #+#             */
-/*   Updated: 2019/07/21 23:16:07 by gedemais         ###   ########.fr       */
+/*   Updated: 2019/07/22 00:24:38 by gedemais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ static inline int	*optimize_rotate(int *buff, unsigned int i, bool *changed)
 
 static inline int	*refresh_buff(int *buff)
 {
-	int		*new;
-	int	i;
-	int	j;
+	int				*new;
 	unsigned int	n_size;
+	int				i;
+	int				j;
 
 	i = -1;
 	n_size = 0;
@@ -88,10 +88,10 @@ static inline int	*refresh_buff(int *buff)
 	return (new);
 }
 
-int	*optimize_buff(int *buff)
+int					*optimize_buff(int *buff)
 {
 	unsigned int	i;
-	bool		changed;
+	bool			changed;
 
 	changed = true;
 	while (changed)
